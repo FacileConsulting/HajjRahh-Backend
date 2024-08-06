@@ -16,3 +16,7 @@ npm install
 ```
 npm run dev
 ```
+- [ ] Development server run on
+```
+http://localhost:8888
+```
