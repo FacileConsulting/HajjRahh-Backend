@@ -1,3 +1,5 @@
+- for image display on the forntend side, we can use the filename of image in json property and use it to show image at the frontend where the images are in public folder.
+
 ## Pre-Requisite
 ```
 - install nodejs and mongodb by msi and write initials code for db connection
