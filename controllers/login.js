@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const { jwtSecret } = require('../config');
 
 // Get the user data
 exports.checkLoginUser = async (req, res) => {
@@ -13,7 +12,7 @@ exports.checkLoginUser = async (req, res) => {
     if (!user) {
       return res.status(400).send({ message: 'User not registered', error: false, invalidUser: true });
     }
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
     res.status(200).send({ 
       error: false,
       token, 
