@@ -5,6 +5,7 @@ const connectDB = require('./db');
 const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
 const searchHolidaysRoute = require('./routes/searchHolidays');
+const searchFlightsRoute = require('./routes/searchFlights');
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -43,6 +44,7 @@ connectDB();
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/searchHolidays", searchHolidaysRoute);
+app.use("/api/searchFlights", searchFlightsRoute);
 
 console.log('kiran', process.env.PORT);
 const port = process.env.PORT || 8888;
