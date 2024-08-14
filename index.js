@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectDB = require('./db');
 const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
+const myAccountRoute = require('./routes/myAccount');
 const searchHolidaysRoute = require('./routes/searchHolidays');
 const searchFlightsRoute = require('./routes/searchFlights');
 const app = express();
@@ -43,6 +44,7 @@ connectDB();
  */
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
+app.use("/api/myAccount", myAccountRoute);
 app.use("/api/searchHolidays", searchHolidaysRoute);
 app.use("/api/searchFlights", searchFlightsRoute);
 
