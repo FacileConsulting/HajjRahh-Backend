@@ -2,8 +2,8 @@ const User = require('../models/user');
 
 exports.myAccount = async (req, res) => {
   try {
-    const { username, email, phoneNumber, address, password, newPassword, confirmPassword, isEnabledEmailNotification, paymentMethodType, type } = req.body;
-    const user = await User.findOne({ email });
+    const { _id, username, email, phoneNumber, address, password, newPassword, isEnabledEmailNotification, paymentMethodType, type } = req.body;
+    const user = await User.findOne({ _id });
 
     if (user && type === 'EDIT_PROFILE') {
       if (username) {
@@ -24,16 +24,16 @@ exports.myAccount = async (req, res) => {
         token: user.token, 
         username: user.username, 
         email: user.email, 
-        phonenumber: user.phonenumber, 
+        phoneNumber: user.phoneNumber, 
         address: user.address,
       });
     }  
 
     if (user && type === 'CHANGE_PASSWORD') {
       if (password && !(await user.comparePassword(password))) {
-        return res.status(200).send({ message: 'Invalid Old Password', status: 'success', invalidPassword: true });
+        return res.status(200).send({ message: 'Invalid old password', status: 'success', invalidPassword: true });
       }
-      if (newPassword && confirmPassword) {
+      if (newPassword) {
         user.password = newPassword;
         await user.save();
         res.status(200).send({ message: 'Password changed successfully', status: 'success', passwordChanged: true });
@@ -41,7 +41,7 @@ exports.myAccount = async (req, res) => {
     }  
 
     if (user && type === 'NOTIFICATION_SETTINGS') {
-      if (isEnabledEmailNotification !== undefined) {
+      if (isEnabledEmailNotification) {
         user.isEnabledEmailNotification = isEnabledEmailNotification;
       }
       await user.save();

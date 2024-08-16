@@ -11,17 +11,21 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  phonenumber: {
+  phoneNumber: {
     type: String,
     required: false
   },
   address: {
     type: String,
     required: false
-  },
+  }, 
   password: {
     type: String,
     required: true
+  },
+  isEnabledEmailNotification: {
+    type: String,
+    required: false
   }
 });
 

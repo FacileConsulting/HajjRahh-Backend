@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 // Get the user data
 exports.checkLoginUser = async (req, res) => {
   try {
-    const { username, email, phonenumber, address, password } = req.body;
+    const { username, email, phoneNumber, address, password } = req.body;
     const user = await User.findOne({ email });
     if (user && !(await user.comparePassword(password))) {
       return res.status(400).send({ message: 'Invalid password', status: 'success', invalidPassword: true });
@@ -18,7 +18,7 @@ exports.checkLoginUser = async (req, res) => {
       token, 
       username: user.username, 
       email: user.email, 
-      phonenumber: user.phonenumber, 
+      phoneNumber: user.phoneNumber, 
       address: user.address,
     });
   } catch (error) {
