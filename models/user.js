@@ -22,9 +22,13 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
+  }, 
   isEnabledEmailNotification: {
     type: String,
+    required: false
+  },
+  paymentMethodType: {
+    type: Array,
     required: false
   }
 });
