@@ -9,13 +9,13 @@ exports.searchPackages = async (req, res) => {
     const packages = await Package.find({});
     // console.log('departurepackages',packages);
     if (!packages) {
-      return res.status(400).send({ message: 'No search for holidays', error: false, data: [] });
+      return res.status(200).send({ message: 'No search for holidays', status: 'success', data: [] });
     }
     await res.status(200).send({
-      error: false,
+      status: 'success',
       data: packages || [],
     });
   } catch (error) {
-    res.status(500).send({ message: 'Error in search holidays', error: true });
+    res.status(500).send({ message: 'Error in search holidays', status: 'error' });
   }
 };

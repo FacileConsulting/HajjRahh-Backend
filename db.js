@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
  * Used the mongodb connection with port and database name
  */
 const connectDB = async () => {
-  console.log('MongoDB connection with port and database name', process.env.mongoURI);
+  console.log('MongoDB connection with port and database name', process.env.MONGODB_URI);
   try {
     mongoose.connect(process.env.mongoURI || 'mongodb://localhost:27017/hajjrahh_db', {
       useNewUrlParser: true,

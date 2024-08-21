@@ -6,6 +6,7 @@ const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
 const myAccountRoute = require('./routes/myAccount');
 const searchHolidaysRoute = require('./routes/searchHolidays');
+const tripsRoute = require('./routes/trips');
 const searchFlightsRoute = require('./routes/searchFlights');
 const app = express();
 
@@ -46,10 +47,11 @@ app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/myAccount", myAccountRoute);
 app.use("/api/searchHolidays", searchHolidaysRoute);
+app.use("/api/trips", tripsRoute);
 app.use("/api/searchFlights", searchFlightsRoute);
 
 console.log('kiran', process.env.PORT);
-const port = process.env.PORT || 8888;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`Backend server is running! on ${port}`);
