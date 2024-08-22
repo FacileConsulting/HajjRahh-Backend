@@ -1,0 +1,228 @@
+[
+    {
+        "packageName": "4S BCF AB Shimmery Mecca - (MH/KL to Mecca 24/26-O)",
+        "destination": "Mecca",
+        "departure": [
+            "Mumbai",
+            "Kolkata"
+        ],
+        "dateRange": ["24-10-2024", "25-10-2024", "26-10-2024"],
+        "price": 3900,
+        "totalNights": 7,
+        "packageDuration": "7 Nights / 8 Days",
+        "transportation": ["bus", "cruise", "flight"],
+        "theme": ["adventure", "beach"],
+        "facilities": [
+            "WiFi",
+            "Meals",
+            "Transportation",
+            "Sightseeing"
+        ],
+        "avatarPhotoUrl": "https://hajjrahh.com/wp-content/uploads/2019/12/unnamed-1-1.jpg",
+        "packageDetails": {
+            "overview": "Discover the city of firsts and experience the thrill of adventure. Immerse yourself in the vibrant atmosphere of Dubai, where high-rise buildings, luxury cuisines, exciting activities, and captivating city views await you. Book this affordable 5-day Dubai tour and make memories that will last a lifetime.",
+            "dropLocation": "Dubai",
+            "inclusions": [
+                "WiFi",
+                "Meet and greet at arrival",
+                "Sightseeing in a shared vehicle",
+                "Pick-up and drop-off at the designated times",
+                "Breakfast",
+                "Dubai city tour",
+                "Visit to the 124th floor of Burj Khalifa",
+                "Dhow cruise",
+                "Desert safari",
+                "All tours and transfers by shared car are included"
+            ],
+            "exclusions": [
+                "Alcoholic or non-alcoholic drinks",
+                "5% Goods and Services Tax (GST)",
+                "Any airfare or train fare",
+                "Personal expenses",
+                "Anything not mentioned in the inclusions"
+            ],
+            "paymentPolicy": {
+                "bookingValidity": "From August 28, 2018 to April 30, 2025",
+                "cancelationPolicy": [
+                    "30 or more days before departure: 50% refund",
+                    "Between 29 and 15 days before departure: full refund"
+                ]
+            },
+            "termsAndConditions": [
+                "The suggested itinerary is just a guide and can be changed by our local transporter at any time.",
+                "Flight prices are subject to availability at the time of booking and may vary. The actual flight price may differ from the package price.",
+                "Children under 2 years are included in the land package but will be charged separately for the flight ticket.",
+                "The mentioned rates are just a offer. If there is a change in the number of passengers, the rates may change based on the final number of passengers with the updated price available.",
+                "Please double-check the quotation for all requested options in the inclusions.",
+                "We recommend upgrading the hotels to your preference and the star rating category."
+            ],
+            "dayWiseItinerary": [
+                {
+                    "dayNumber": 1,
+                    "title": "Arrival in Dubai - Dhow Cruise",
+                    "description": "Arrive at Dubai International Airport and check-in to your hotel or resort. Enjoy a delicious dinner on the Dhow Cruise, featuring stunning views of Dubai Creek and luxurious buildings."
+                },
+                {
+                    "dayNumber": 2,
+                    "title": "Dubai City Tour - Visit to the 124th Floor of Burj Khalifa",
+                    "description": "Start your day with a delicious breakfast and embark on a thrilling sightseeing tour of Dubai. Explore iconic attractions, architectural marvels, and witness the breathtaking views of the city. End the tour with a visit to the 124th floor of Burj Khalifa, offering a panoramic view of the city."
+                },
+                {
+                    "dayNumber": 3,
+                    "title": "Desert Safari",
+                    "description": "Start the day with a sumptuous breakfast and embark on an exciting desert safari, immersing yourself in the stunning sand dunes."
+                }
+            ],
+            "detailedItinerary": [
+                {
+                    "dayNumber": 1,
+                    "activities": [
+                        "Dhow Cruise"
+                    ],
+                    "hotel": "Ramada Deira, 4-star, check-in for 4 nights",
+                    "stars": 4
+                },
+                {
+                    "dayNumber": 2,
+                    "activities": [
+                        "Dubai city tour",
+                        "Visit to the 124th Floor of Burj Khalifa"
+                    ],
+                    "hotel": "Ramada Deira, 4-star",
+                    "stars": 4
+                },
+                {
+                    "dayNumber": 3,
+                    "activities": [
+                        "Desert Safari"
+                    ],
+                    "hotel": "Ramada Deira, 4-star",
+                    "stars": 4
+                },
+                {
+                    "dayNumber": 4,
+                    "hotel": "Ramada Deira, 4-star",
+                    "stars": 4
+                },
+                {
+                    "dayNumber": 5,
+                    "hotel": "Ramada Deira, 4-star, check-out",
+                    "stars": 4
+                }
+            ]
+        }
+    },
+    {
+        "packageName": "2S OL ABA Whole Kaaba - (DL/CH - Kaaba 13/16-S)",
+        "destination": "Kaaba",
+        "departure": [
+            "Delhi",
+            "Chennai"
+        ],
+        "dateRange": ["13-09-2024", "14-09-2024", "15-09-2024", "16-09-2024"],
+        "price": 24000,
+        "totalNights": 2,
+        "packageDuration": "2 Nights / 3 Days",
+        "transportation": ["optional", "landonly"],
+        "theme": ["affordable", "best seller", "art and culture"],
+        "facilities": [
+            "WiFi",
+            "Meals",
+            "Transportation",
+            "Sightseeing"
+        ],
+        "avatarPhotoUrl": "https://hajjrahh.com/wp-content/uploads/2019/12/unnamed-1-1.jpg",
+        "packageDetails": {
+            "overview": "Discover the city of firsts and experience the thrill of adventure. Immerse yourself in the vibrant atmosphere of Dubai, where high-rise buildings, luxury cuisines, exciting activities, and captivating city views await you. Book this affordable 5-day Dubai tour and make memories that will last a lifetime.",
+            "dropLocation": "Dubai",
+            "inclusions": [
+                "WiFi",
+                "Meet and greet at arrival",
+                "Sightseeing in a shared vehicle",
+                "Pick-up and drop-off at the designated times",
+                "Breakfast",
+                "Dubai city tour",
+                "Visit to the 124th floor of Burj Khalifa",
+                "Dhow cruise",
+                "Desert safari",
+                "All tours and transfers by shared car are included"
+            ],
+            "exclusions": [
+                "Alcoholic or non-alcoholic drinks",
+                "5% Goods and Services Tax (GST)",
+                "Any airfare or train fare",
+                "Personal expenses",
+                "Anything not mentioned in the inclusions"
+            ],
+            "paymentPolicy": {
+                "bookingValidity": "From August 28, 2018 to April 30, 2025",
+                "cancelationPolicy": [
+                    "30 or more days before departure: 50% refund",
+                    "Between 29 and 15 days before departure: full refund"
+                ]
+            },
+            "termsAndConditions": [
+                "The suggested itinerary is just a guide and can be changed by our local transporter at any time.",
+                "Flight prices are subject to availability at the time of booking and may vary. The actual flight price may differ from the package price.",
+                "Children under 2 years are included in the land package but will be charged separately for the flight ticket.",
+                "The mentioned rates are just a offer. If there is a change in the number of passengers, the rates may change based on the final number of passengers with the updated price available.",
+                "Please double-check the quotation for all requested options in the inclusions.",
+                "We recommend upgrading the hotels to your preference and the star rating category."
+            ],
+            "dayWiseItinerary": [
+                {
+                    "dayNumber": 1,
+                    "title": "Arrival in Dubai - Dhow Cruise",
+                    "description": "Arrive at Dubai International Airport and check-in to your hotel or resort. Enjoy a delicious dinner on the Dhow Cruise, featuring stunning views of Dubai Creek and luxurious buildings."
+                },
+                {
+                    "dayNumber": 2,
+                    "title": "Dubai City Tour - Visit to the 124th Floor of Burj Khalifa",
+                    "description": "Start your day with a delicious breakfast and embark on a thrilling sightseeing tour of Dubai. Explore iconic attractions, architectural marvels, and witness the breathtaking views of the city. End the tour with a visit to the 124th floor of Burj Khalifa, offering a panoramic view of the city."
+                },
+                {
+                    "dayNumber": 3,
+                    "title": "Desert Safari",
+                    "description": "Start the day with a sumptuous breakfast and embark on an exciting desert safari, immersing yourself in the stunning sand dunes."
+                }
+            ],
+            "detailedItinerary": [
+                {
+                    "dayNumber": 1,
+                    "activities": [
+                        "Dhow Cruise"
+                    ],
+                    "hotel": "Ramada Deira, 4-star, check-in for 4 nights",
+                    "stars": 2
+                },
+                {
+                    "dayNumber": 2,
+                    "activities": [
+                        "Dubai city tour",
+                        "Visit to the 124th Floor of Burj Khalifa"
+                    ],
+                    "hotel": "Ramada Deira, 4-star",
+                    "stars": 2
+                },
+                {
+                    "dayNumber": 3,
+                    "activities": [
+                        "Desert Safari"
+                    ],
+                    "hotel": "Ramada Deira, 4-star",
+                    "stars": 2
+                },
+                {
+                    "dayNumber": 4,
+                    "hotel": "Ramada Deira, 4-star",
+                    "stars": 2
+                },
+                {
+                    "dayNumber": 5,
+                    "hotel": "Ramada Deira, 4-star, check-out",
+                    "stars": 2
+                }
+            ]
+        }
+    }
+]

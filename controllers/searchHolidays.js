@@ -1,13 +1,28 @@
-const Package = require('../models/package');
-const jwt = require('jsonwebtoken');
+const Packages = require('../models/packages');
 
 // Get the user data
 exports.searchPackages = async (req, res) => {
   try {
+    console.log('searchPackages', req.body);
     const { departure, destination, startDate, endDate, noOfPeople } = req.body;
-    // console.log('departure, destination, startDate, endDate, noOfPeople', departure, destination, startDate, endDate, noOfPeople);
-    const packages = await Package.find({});
-    // console.log('departurepackages',packages);
+
+    let query = {};
+
+    if (departure) {
+      query.departure = departure;
+    }
+    if (destination) {
+      query.destination = destination;
+    }
+    if (startDate && endDate) {
+      query.dateRange = {
+        $all: [startDate, endDate]
+      };
+    }
+
+    console.log('querye', query);
+    const packages = await Packages.find(query);
+    console.log('departurepackages', packages.length);
     if (!packages) {
       return res.status(200).send({ message: 'No search for holidays', status: 'success', data: [] });
     }
