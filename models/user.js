@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
   paymentMethodType: {
     type: Array,
     required: false
+  },
+  trips: {
+    type: Array,
+    required: false
   }
 });
 

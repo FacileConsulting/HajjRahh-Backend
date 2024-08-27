@@ -10,7 +10,7 @@
   "address": "Railway Road, Bangalore",
   "password": "$2a$10$TW2zMtFGFmSF8aOwPH9.Yexy.Rgn4l6xxKfpsUBkf3zXM8TvNm83y",
   "isEnabledEmailNotification": "emailDisabled",
-  "upcomingTrips": [
+  "trips": [
     {
       "packageId": "5f0e0f0b9a5b9b0f8e8e8e8e",
       "tripStatus": "upcoming"
@@ -18,15 +18,11 @@
     {
       "packageId": "7o0e0f0b9a5b9b0f8e8e8eu8",
       "tripStatus": "upcoming"
-    }
-  ],
-  "ongoingTrips": [
+    },
     {
       "packageId": "8n0e0f0b9a5b9b0f8e8e8iop",
       "tripStatus": "live"
-    }
-  ],
-  "pastTrips": [
+    },
     {
       "packageId": "12le0f0b9a5b9b0f8e8e8hj8",
       "tripStatus": "cancelled"

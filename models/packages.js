@@ -31,23 +31,23 @@ const packagesSchema = new mongoose.Schema({
   },
   transportation: {
     type: Array,
-    required: true
+    required: false
   },
   theme: {
     type: Array,
-    required: true
+    required: false
   },
   facilities: {
     type: Array,
-    required: true
+    required: false
   },
-  avatarPhotoUrl: {
+  image: {
     type: String,
-    required: true
+    required: false
   },
   packageDetails: {
     type: Object,
-    required: true
+    required: false
   },
 });
 
