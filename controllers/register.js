@@ -3,6 +3,7 @@ const User = require('../models/user');
 exports.registerUser = async (req, res) => {
   try {
     const { username, email, phoneNumber, address, password } = req.body;
+    console.log("sdfdsfsdfdsfsdfdsfd", username, email, phoneNumber, address, password)
 
     // Check if required fields are present
     if (!username || !email || !password) {
