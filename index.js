@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require('./db');
 const loginRoute = require('./routes/login');
+const healthRoute = require('./routes/health');
 const registerRoute = require('./routes/register');
 const myAccountRoute = require('./routes/myAccount');
 const searchHolidaysRoute = require('./routes/searchHolidays');
@@ -43,6 +44,8 @@ connectDB();
  * To handle routes for API creations
  * /api/ is used for prefix slug
  */
+
+app.use("/api/health", healthRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/myAccount", myAccountRoute);
