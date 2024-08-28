@@ -18,9 +18,10 @@ app.use(bodyParser.json());
  * Used to switch between prod and dev origin url
  * You can update the methods as per needs
  */
+const apiUrl = process.env.REACT_APP_API_URL || "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
 app.use(cors({
-  // origin: ["https://hajjrahh.com", "https://www.hajjrahh.com"],
-  origin: "*",
+  origin: [apiUrl],
+  // origin: "*",
   methods: "GET,POST"
 }));
 
