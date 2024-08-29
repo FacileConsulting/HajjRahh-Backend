@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
  * Used the mongodb connection with port and database name
  */
 const connectDB = async () => {
-  console.log('MongoDB connection with port and database name', process.env.MONGODB_URI);
+  const dbUrl = "mongodb+srv://hajjrahh:OKIKyKtwzMFv6GmC@hajjrahhdev.fn7t3.mongodb.net/hajjrahh_database";
+  // const dbUrl = "mongodb+srv://kiranmlvya11:jlmTYgKTpoDi9TJl@hajjrahh.zn3zx.mongodb.net/hajjrahh_dbs";
+  // const dbUrl = "mongodb://localhost:27017/hajjrahh_db";
   try {
-    mongoose.connect(process.env.mongoURI, {
+    mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });

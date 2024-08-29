@@ -18,7 +18,8 @@ app.use(bodyParser.json());
  * Used to switch between prod and dev origin url
  * You can update the methods as per needs
  */
-const apiUrl = process.env.REACT_APP_API_URL || "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
+const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
+// const apiUrl = "http://localhost:8000";
 app.use(cors({
   origin: [apiUrl],
   // origin: "*",
@@ -54,7 +55,7 @@ app.use("/api/searchHolidays", searchHolidaysRoute);
 app.use("/api/trips", tripsRoute);
 app.use("/api/searchFlights", searchFlightsRoute);
 
-console.log('kiran', process.env.PORT);
+console.log('PORT : ', process.env.PORT);
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
