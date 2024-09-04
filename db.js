@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
   const dbUrl = "mongodb+srv://hajjrahh:OKIKyKtwzMFv6GmC@hajjrahhdev.fn7t3.mongodb.net/hajjrahh_database";
   // const dbUrl = "mongodb+srv://kiranmlvya11:jlmTYgKTpoDi9TJl@hajjrahh.zn3zx.mongodb.net/hajjrahh_dbs";
-  // const dbUrl = "mongodb://localhost:27017/hajjrahh_db";
+  // const dbUrl = "mongodb://localhost:27017/hajjrahh_database";
   try {
     mongoose.connect(dbUrl, {
       useNewUrlParser: true,
