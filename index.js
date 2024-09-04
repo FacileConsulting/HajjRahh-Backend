@@ -21,8 +21,8 @@ app.use(bodyParser.json());
 const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
 // const apiUrl = "http://localhost:8000";
 app.use(cors({
-  origin: "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net",
-  // origin: "*",
+  // origin: "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net",
+  origin: "*",
   methods: "GET,POST"
 }));
 
