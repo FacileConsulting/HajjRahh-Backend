@@ -4,7 +4,6 @@ const Packages = require('../models/packages');
 // Get the user data
 exports.trips = async (req, res) => {
   try {
-
     const getPackages = async (query) => {
       const packages = await Packages.find(query);
       return packages || [];
@@ -32,8 +31,8 @@ exports.trips = async (req, res) => {
       return trips;
     }
 
-    const { id } = req.body;
-    const user = await User.findOne({ _id: id });    
+    const { email } = req.body;
+    const user = await User.findOne({ email });    
 
     if (!user) {
       return res.status(200).send({ message: 'You are not loggedIn.', status: 'success', data: [] });
