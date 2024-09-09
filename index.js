@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+const authMiddleware = require('./middleware/authMiddleware');
 const connectDB = require('./db');
 const loginRoute = require('./routes/login');
 const healthRoute = require('./routes/health');
@@ -13,6 +15,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 /**
  * Used to switch between prod and dev origin url
@@ -21,7 +24,7 @@ app.use(bodyParser.json());
 const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
 // const apiUrl = "http://localhost:8000";
 app.use(cors({
-  // origin: "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net",
+  // origin: "http://localhost:8000",
   origin: "*",
   methods: "GET,POST"
 }));
@@ -50,9 +53,9 @@ connectDB();
 app.use("/api/health", healthRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
-app.use("/api/myAccount", myAccountRoute);
+app.use("/api/myAccount", authMiddleware, myAccountRoute);
 app.use("/api/searchHolidays", searchHolidaysRoute);
-app.use("/api/trips", tripsRoute);
+app.use("/api/trips", authMiddleware, tripsRoute);
 app.use("/api/searchFlights", searchFlightsRoute);
 
 console.log('PORT : ', process.env.PORT);

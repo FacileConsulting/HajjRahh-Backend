@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: false
+    required: true
   },
   address: {
     type: String,
@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
   },
   trips: {
     type: Array,
+    required: false
+  },
+  token: {
+    type: String,
     required: false
   }
 });

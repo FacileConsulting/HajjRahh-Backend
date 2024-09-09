@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 exports.checkLoginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    // console.log('QQQQQQQQQQQ##   token', email, password);
     const user = await User.findOne({ email });
     if (user && !(await user.comparePassword(password))) {
       return res.status(200).send({ message: 'Invalid password', status: 'success', invalidPassword: true });
@@ -12,7 +13,7 @@ exports.checkLoginUser = async (req, res) => {
     if (!user) {
       return res.status(200).send({ message: 'User not registered', status: 'success', invalidUser: true });
     }
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
+    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
     res.status(200).send({ 
       message: 'User logged in successfully', 
       status: 'success',

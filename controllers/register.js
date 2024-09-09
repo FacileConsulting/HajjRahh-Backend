@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 exports.registerUser = async (req, res) => {
   try {
@@ -11,21 +12,24 @@ exports.registerUser = async (req, res) => {
       return res.status(200).send({ message: 'User already registered. Please Sign In', status: 'success', isDups: true });
     }
 
-    // Create new user
+    // Create new user    
     const newUser = new User({ username, email, phoneNumber, address, password, isEnabledEmailNotification: "emailEnabled" });
     await newUser.save();
 
     // Send response with user data
-    const fetchSameUser = await User.findOne({ email });
+    const token = jwt.sign({ email: email }, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
     return res.status(200).send({ 
       message: 'User registered successfully', 
       status: 'success', 
       userCreated: true,
-      username: fetchSameUser.username, 
-      email: fetchSameUser.email, 
-      phoneNumber: fetchSameUser.phoneNumber, 
-      address: fetchSameUser.address, 
-      isEnabledEmailNotification: fetchSameUser.isEnabledEmailNotification 
+      token, 
+      username, 
+      email, 
+      phoneNumber, 
+      address, 
+      isEnabledEmailNotification: 'emailEnabled',
+      paymentMethodType: [], 
+      trips: []
     });
 
   } catch (error) {
