@@ -6,6 +6,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 const connectDB = require('./db');
 const loginRoute = require('./routes/login');
 const healthRoute = require('./routes/health');
+const refreshTokenRoute = require('./routes/refreshToken');
 const registerRoute = require('./routes/register');
 const myAccountRoute = require('./routes/myAccount');
 const searchHolidaysRoute = require('./routes/searchHolidays');
@@ -51,6 +52,7 @@ connectDB();
  */
 
 app.use("/api/health", healthRoute);
+app.use("/api/refreshToken", refreshTokenRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/myAccount", authMiddleware, myAccountRoute);
