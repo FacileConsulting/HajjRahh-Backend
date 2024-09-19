@@ -22,11 +22,16 @@ const refreshAmadeusToken = async (failedRequest) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data: qs.stringify({
-        'client_id': process.env.AMADEUS_TEST_API_KEY,
-        'client_secret': process.env.AMADEUS_TEST_API_SECRET,
-        'grant_type': 'client_credentials'
+      data: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: process.env.AMADEUS_TEST_API_KEY,
+        client_secret: process.env.AMADEUS_TEST_API_SECRET
       })
+      // data: qs.stringify({
+      //   'client_id': process.env.AMADEUS_TEST_API_KEY,
+      //   'client_secret': process.env.AMADEUS_TEST_API_SECRET,
+      //   'grant_type': 'client_credentials'
+      // })
     };
     const response = await axiosInstance.request(config);
     const { status, data } = response;
@@ -56,11 +61,13 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
+    const originalRequest = error.config;    
+    console.log('@@@@@@@@@@@##################', error.response.status, !originalRequest._retry)
     if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         const newBearerToken = await refreshAmadeusToken();
+        console.log('newBearerTokennewBearerTokennewBearerToken@@@@@@@@@@@##################', newBearerToken)
         originalRequest.headers['Authorization'] = newBearerToken;
         console.log('!@!!!!!!!!!', global.amadeus_access_token, newBearerToken);
         return axiosInstance(originalRequest);
@@ -75,5 +82,6 @@ axiosInstance.interceptors.response.use(
 module.exports = {
   baseURL,
   amadeusFlightsURL,
-  axiosInstance
+  axiosInstance,
+  refreshAmadeusToken
 };
