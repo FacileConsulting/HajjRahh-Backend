@@ -11,7 +11,8 @@ const registerRoute = require('./routes/register');
 const myAccountRoute = require('./routes/myAccount');
 const searchHolidaysRoute = require('./routes/searchHolidays');
 const tripsRoute = require('./routes/trips');
-const searchFlightsRoute = require('./routes/searchFlights');
+const searchFlightsRoute = require('./routes/searchFlights'); 
+const searchAirportRoute = require('./routes/searchAirport');
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -59,6 +60,7 @@ app.use("/api/myAccount", authMiddleware, myAccountRoute);
 app.use("/api/searchHolidays", searchHolidaysRoute);
 app.use("/api/trips", authMiddleware, tripsRoute);
 app.use("/api/searchFlights", searchFlightsRoute);
+app.use("/api/searchAirport", searchAirportRoute);
 
 console.log('PORT : ', process.env.PORT);
 const port = process.env.PORT || 8000;

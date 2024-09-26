@@ -4,6 +4,8 @@ const qs = require('qs');
 const baseURL = 'https://test.api.amadeus.com';
 const amadeusTokenURL = '/v1/security/oauth2/token';
 const amadeusFlightsURL = '/v2/shopping/flight-offers?';
+const amadeusAirportURL = '/v1/reference-data/locations?';
+
 
 const axiosInstance = axios.create({
   baseURL,
@@ -82,6 +84,7 @@ axiosInstance.interceptors.response.use(
 module.exports = {
   baseURL,
   amadeusFlightsURL,
+  amadeusAirportURL,
   axiosInstance,
   refreshAmadeusToken
 };
