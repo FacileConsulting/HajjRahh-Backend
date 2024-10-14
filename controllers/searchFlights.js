@@ -8,8 +8,9 @@ const {
 exports.searchFlights = async (req, res) => {
   try {
 
-    const { flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, adults, children, infants, travelClass, emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;
+    const { fromHoliday = false, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, flightType = true, adults = 1, children = 0, infants = 0, travelClass = 'ECONOMY', emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;
     
+    console.log('#@#@@@@@@@@@', adults, fromHoliday, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate);
     const getAirlinesArray = () => {
       const getValues = [];
       if (emirates) {
@@ -93,24 +94,25 @@ exports.searchFlights = async (req, res) => {
       return totalMinutes;
     }
     
-    let urlTemp = `${baseURL}${amadeusFlightsURL}originLocationCode=${flyingFrom}&destinationLocationCode=${flyingTo}&departureDate=${flightDepartureDate}&adults=${adults}&children=${children}&infants=${infants}&travelClass=${travelClass}&currencyCode=USD`;
+    let url = `${baseURL}${amadeusFlightsURL}originLocationCode=${flyingFrom}&destinationLocationCode=${flyingTo}&departureDate=${flightDepartureDate}&adults=${adults}&children=${children}&infants=${infants}&travelClass=${travelClass}&currencyCode=USD`;
     if (flightReturnDate) {
-      urlTemp = `${urlTemp}&returnDate=${flightReturnDate}`;
+      url = `${url}&returnDate=${flightReturnDate}`;
+    }
+    if (flightType) {
+      url = `${url}&nonStop=${flightType}`;
     }
 
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: urlTemp,
+      url: url,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${global.amadeus_access_token}`
       }
     };
 
-    console.log('##@#', config);
-
-    
+    console.log('##@#', config);    
 
     const filterFlightsData = (getData) => {
       // console.log(getData);
@@ -214,7 +216,12 @@ exports.searchFlights = async (req, res) => {
       const response = await axiosInstance.request(config);
       // console.log('##@#response', Object.keys(response.data));
       // const datum = response.data;
-      const datum = filterFlightsData(response.data);
+      let datum;
+      if (fromHoliday) {
+        datum = response.data;
+      } else {
+        datum = filterFlightsData(response.data);
+      }
       return res.status(200).send({ data: datum, status: 'success' });
     }
     callingforSearchFlight();

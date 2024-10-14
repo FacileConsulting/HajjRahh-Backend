@@ -17,6 +17,22 @@ const packagesSchema = new mongoose.Schema({
     type: Array,
     required: true
   },
+  food: {
+    type: String,
+    required: false
+  },
+  sacred: {
+    type: String,
+    required: false
+  },
+  hotelStar: {
+    type: Number,
+    required: false
+  },
+  isZiyarat: {
+    type: Boolean,
+    required: false
+  },
   price: {
     type: Number,
     required: true
@@ -34,6 +50,26 @@ const packagesSchema = new mongoose.Schema({
     required: false
   },
   theme: {
+    type: Array,
+    required: false
+  },
+  tourFocus: {
+    type: Array,
+    required: false
+  },
+  language: {
+    type: Array,
+    required: false
+  },
+  meals: {
+    type: Array,
+    required: false
+  },
+  vehicles: {
+    type: Array,
+    required: false
+  },
+  specialAmenities: {
     type: Array,
     required: false
   },
