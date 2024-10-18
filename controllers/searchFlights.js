@@ -8,7 +8,7 @@ const {
 exports.searchFlights = async (req, res) => {
   try {
 
-    const { fromHoliday = false, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, flightType = true, adults = 1, children = 0, infants = 0, travelClass = 'ECONOMY', emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;
+    const { fromHoliday = false, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, flightType = true, adults = 1, children = 1, infants = 1, travelClass = 'ECONOMY', emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;
     
     console.log('#@#@@@@@@@@@', adults, fromHoliday, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate);
     const getAirlinesArray = () => {

@@ -21,6 +21,7 @@ exports.registerUser = async (req, res) => {
     return res.status(200).send({ 
       message: 'User registered successfully', 
       status: 'success', 
+      userId: newUser._id,
       userCreated: true,
       token, 
       username, 

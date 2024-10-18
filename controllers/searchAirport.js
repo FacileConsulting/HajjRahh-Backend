@@ -26,9 +26,10 @@ exports.searchAirport = async (req, res) => {
 
     const callingforSearchAirport = async() => {
       const response = await axiosInstance.request(config);
-      console.log('##@#response', Object.keys(response.data));
+      console.log('##@#response', response?.data?.data[0], Object.keys(response.data));
       const data = response?.data?.data.length > 0 ? response?.data?.data[0].name : '';
-      return res.status(200).send({ data, status: 'success' });
+      const country = response?.data?.data.length > 0 ? response?.data?.data[0].address.countryName : '';
+      return res.status(200).send({ data, status: 'success', country });
     }
     callingforSearchAirport();
   } catch (error) {

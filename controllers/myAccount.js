@@ -21,6 +21,7 @@ exports.myAccount = async (req, res) => {
       await user.save();
       res.status(200).send({ 
         status: 'success',
+        userId: user._id,
         token: user.token, 
         username: user.username, 
         email: user.email, 

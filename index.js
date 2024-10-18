@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const authMiddleware = require('./middleware/authMiddleware');
 const connectDB = require('./db');
+const holidayBookingRoute = require('./routes/holidayBooking');
 const loginRoute = require('./routes/login');
 const healthRoute = require('./routes/health');
 const refreshTokenRoute = require('./routes/refreshToken');
@@ -53,7 +54,8 @@ connectDB();
  */
 
 app.use("/api/health", healthRoute);
-app.use("/api/refreshToken", refreshTokenRoute);
+app.use("/api/refreshToken", refreshTokenRoute); 
+app.use("/api/holidayBooking", holidayBookingRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/myAccount", authMiddleware, myAccountRoute);

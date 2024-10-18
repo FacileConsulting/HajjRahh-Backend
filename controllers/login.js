@@ -17,6 +17,7 @@ exports.checkLoginUser = async (req, res) => {
     res.status(200).send({ 
       message: 'User logged in successfully', 
       status: 'success',
+      userId: user._id,
       token, 
       userLoggedIn: true,
       username: user.username, 
