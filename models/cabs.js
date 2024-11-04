@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const cabsSchema = new mongoose.Schema({
-  cabTripType: {
-    type: String,
-    required: true
-  },
   cabPickUpPlace: {
     type: String,
     required: true

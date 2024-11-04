@@ -5,7 +5,7 @@ exports.searchCabs = async (req, res) => {
   try {
     console.log('searchCabs', req.body);
 
-    const { cabTripType, cabPickUpPlace, cabDropPlace, cabDate, cabTime, cabPassengers3, cabPassengers4, cabPassengers5, cabPassengers6, cabPriceLt40, cabPriceLt60, cabPriceLt80, cabPriceLt100, cabVehicleHatchback, cabVehicleSedan, cabVehicleSUV, cabVehicleMUV, cabVehicleCompactSUV, cabModelWagonR, cabModelIndica, cabModelDzire, cabModelEtios, cabModelXcent } = req.body;
+    const { cabPickUpPlace, cabDropPlace, cabDate, cabTime, cabPassengers3, cabPassengers4, cabPassengers5, cabPassengers6, cabPriceLt40, cabPriceLt60, cabPriceLt80, cabPriceLt100, cabVehicleHatchback, cabVehicleSedan, cabVehicleSUV, cabVehicleMUV, cabVehicleCompactSUV, cabModelWagonR, cabModelIndica, cabModelDzire, cabModelEtios, cabModelXcent } = req.body;
 
 
     const getPassengersCount = () => {
@@ -71,10 +71,6 @@ exports.searchCabs = async (req, res) => {
     ) {
       console.log('isfalse');
       query = { $or: [] };
-    }
-
-    if (cabTripType) {
-      query.cabTripType = cabTripType === 'oneWay' ? 'oneway' : 'roundway';
     }
     
     if (cabPickUpPlace) {
