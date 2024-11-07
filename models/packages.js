@@ -11,7 +11,7 @@ const packagesSchema = new mongoose.Schema({
   },
   departure: {
     type: Array,
-    required: false
+    required: true
   },
   dateRange: {
     type: Array,

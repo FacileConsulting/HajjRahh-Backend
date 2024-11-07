@@ -1,25 +1,27 @@
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
+const { constant } = require('../constant');
+const { getToken } = require('../utils');
+const { 
+  getUser
+} = require('../mongo');
 
 // Get the user data
 exports.checkLoginUser = async (req, res) => {
+  const { c200, c500, login } = constant();
   try {
     const { email, password } = req.body;
-    // console.log('QQQQQQQQQQQ##   token', email, password);
-    const user = await User.findOne({ email });
+    const user = await getUser({ email });
+    // console.log('QQQQQQQQQQQ##   tokenuser', user);
     if (user && !(await user.comparePassword(password))) {
-      return res.status(200).send({ message: 'Invalid password', status: 'success', invalidPassword: true });
+      return res.status(c200).send({ ...login.invalid });
     }
     if (!user) {
-      return res.status(200).send({ message: 'User not registered', status: 'success', invalidUser: true });
+      return res.status(c200).send({ ...login.invalidUser });
     }
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
-    res.status(200).send({ 
-      message: 'User logged in successfully', 
-      status: 'success',
+    const token = getToken({ email: user.email });
+    res.status(c200).send({ 
+      ...login.valid,
       userId: user._id,
-      token, 
-      userLoggedIn: true,
+      token,
       username: user.username, 
       email: user.email, 
       phoneNumber: user.phoneNumber, 
@@ -29,6 +31,6 @@ exports.checkLoginUser = async (req, res) => {
       trips: user.trips
     });
   } catch (error) {
-    res.status(500).send({ message: 'Error logging in', status: 'error' });
+    res.status(c500).send({ ...login.error });
   }
 };

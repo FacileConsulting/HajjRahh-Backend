@@ -25,7 +25,7 @@ app.use(cookieParser());
  * Used to switch between prod and dev origin url
  * You can update the methods as per needs
  */
-const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
+// const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
 // const apiUrl = "http://localhost:8000";
 app.use(cors({
   // origin: "http://localhost:8000",
@@ -33,15 +33,6 @@ app.use(cors({
   methods: "GET,POST"
 }));
 
-
-/**
- * Used to handle the json request and response
- */
-// app.use(express.json());
-
-/**
- * Use the dotenv for .env specially for prod
- */
 dotenv.config();
 
 /**
@@ -49,25 +40,21 @@ dotenv.config();
  */
 connectDB();
 
-/**
- * To handle routes for API creations
- * /api/ is used for prefix slug
- */
-
 app.use("/api/health", healthRoute);
 app.use("/api/refreshToken", refreshTokenRoute); 
-app.use("/api/holidayBooking", holidayBookingRoute);
 app.use("/api/login", loginRoute);
 app.use("/api/register", registerRoute);
 app.use("/api/searchCabs", searchCabsRoute);
-app.use("/api/myAccount", authMiddleware, myAccountRoute);
-app.use("/api/searchHolidays", searchHolidaysRoute);
-app.use("/api/trips", authMiddleware, tripsRoute);
 app.use("/api/searchFlights", searchFlightsRoute);
 app.use("/api/searchAirport", searchAirportRoute);
 
+app.use("/api/holidayBooking", authMiddleware, holidayBookingRoute);
+app.use("/api/myAccount", authMiddleware, myAccountRoute);
+app.use("/api/searchHolidays", authMiddleware, searchHolidaysRoute);
+app.use("/api/trips", authMiddleware, tripsRoute);
+
 console.log('PORT : ', process.env.PORT);
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`Backend server is running! on ${port}`);

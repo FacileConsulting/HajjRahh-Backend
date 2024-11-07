@@ -1,14 +1,8 @@
 const mongoose = require('mongoose');
 
-/**
- * Used the mongodb connection with port and database name
- */
 const connectDB = async () => {
-  const dbUrl = "mongodb+srv://hajjrahh:OKIKyKtwzMFv6GmC@hajjrahhdev.fn7t3.mongodb.net/hajjrahh_database";
-  // const dbUrl = "mongodb+srv://kiranmlvya11:jlmTYgKTpoDi9TJl@hajjrahh.zn3zx.mongodb.net/hajjrahh_dbs";
-  // const dbUrl = "mongodb://localhost:27017/hajjrahh_database";
   try {
-    mongoose.connect(dbUrl, {
+    mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
@@ -31,6 +25,5 @@ const connectDB = async () => {
     process.exit(1); // Exit the process with failure
   }
 }
-
 
 module.exports = connectDB;

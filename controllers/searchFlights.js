@@ -1,16 +1,15 @@
 const {
-  baseURL,
   amadeusFlightsURL,
   axiosInstance,
   refreshAmadeusToken
 } = require('../middleware/amadeusMiddleware');
+const { amadeusConfig } = require('../utils');
 
 exports.searchFlights = async (req, res) => {
   try {
-
-    const { fromHoliday = false, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, flightType = true, adults = 1, children = 1, infants = 1, travelClass = 'ECONOMY', emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;
-    
+    const { fromHoliday = false, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, flightType = true, adults = 1, children = 1, infants = 1, travelClass = 'ECONOMY', emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;    
     console.log('#@#@@@@@@@@@', adults, fromHoliday, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate);
+    
     const getAirlinesArray = () => {
       const getValues = [];
       if (emirates) {
@@ -94,7 +93,7 @@ exports.searchFlights = async (req, res) => {
       return totalMinutes;
     }
     
-    let url = `${baseURL}${amadeusFlightsURL}originLocationCode=${flyingFrom}&destinationLocationCode=${flyingTo}&departureDate=${flightDepartureDate}&adults=${adults}&children=${children}&infants=${infants}&travelClass=${travelClass}&currencyCode=USD`;
+    let url = `${process.env.AMADEUS_TEST_URL}${amadeusFlightsURL}originLocationCode=${flyingFrom}&destinationLocationCode=${flyingTo}&departureDate=${flightDepartureDate}&adults=${adults}&children=${children}&infants=${infants}&travelClass=${travelClass}&currencyCode=USD`;
     if (flightReturnDate) {
       url = `${url}&returnDate=${flightReturnDate}`;
     }
@@ -102,15 +101,7 @@ exports.searchFlights = async (req, res) => {
       url = `${url}&nonStop=${flightType}`;
     }
 
-    let config = {
-      method: 'get',
-      maxBodyLength: Infinity,
-      url: url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${global.amadeus_access_token}`
-      }
-    };
+    const config = amadeusConfig({ url });
 
     console.log('##@#', config);    
 
@@ -122,9 +113,7 @@ exports.searchFlights = async (req, res) => {
         let airlinesArray = getAirlinesArray();
         let durationArray = getDurationArray();
         let stopsArray = getStopsArray();
-        let timeArray = getTimeArray();
-
-        
+        let timeArray = getTimeArray();        
 
         console.log('##@22', airlinesArray, durationArray, stopsArray, timeArray)
 

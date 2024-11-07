@@ -1,35 +1,25 @@
 const {
-  baseURL,
   amadeusAirportURL,
   axiosInstance,
   refreshAmadeusToken
 } = require('../middleware/amadeusMiddleware');
+const { constant } = require('../constant');
+const { amadeusConfig } = require('../utils');
 
 exports.searchAirport = async (req, res) => {
+  const { c200, c500, yS, airport } = constant();
   try {
-
-    const { codes } = req.body;
+    const { codes } = req.body;    
+    const url = `${process.env.AMADEUS_TEST_URL}${amadeusAirportURL}subType=AIRPORT&keyword=${codes.split('-')[0]}&countryCode=${codes.split('-')[1]}`;
     
-    const url = `${baseURL}${amadeusAirportURL}subType=AIRPORT&keyword=${codes.split('-')[0]}&countryCode=${codes.split('-')[1]}`;
-    
-    const config = {
-      method: 'get',
-      maxBodyLength: Infinity,
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${global.amadeus_access_token}`
-      }
-    };
-
-    // console.log('##@#', config); 
+    const config = amadeusConfig({ url });
 
     const callingforSearchAirport = async() => {
       const response = await axiosInstance.request(config);
       console.log('##@#response', response?.data?.data[0], Object.keys(response.data));
       const data = response?.data?.data.length > 0 ? response?.data?.data[0].name : '';
       const country = response?.data?.data.length > 0 ? response?.data?.data[0].address.countryName : '';
-      return res.status(200).send({ data, status: 'success', country });
+      res.status(c200).send({ data, status: yS, country });
     }
     callingforSearchAirport();
   } catch (error) {
@@ -39,6 +29,6 @@ exports.searchAirport = async (req, res) => {
     if (typeof response === 'string') {
       callingforSearchAirport();
     }
-    return res.status(500).send({ message: 'Error in searchAirport API', status: 'error' });
+    return res.status(c500).send({ ...airport.error });
   }
 };

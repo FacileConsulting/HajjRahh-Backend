@@ -1,11 +1,12 @@
-
+const { constant } = require('../constant');
 
 exports.checkHealth = async (req, res) => {
+  const { c200, c500, health } = constant();
   try {
     // Send response with user data
-    res.status(200).send({ message: 'Health API called successfully', status: 'success' });
+    res.status(c200).send({ ...health.valid });
   } catch (error) {
     console.error(error);
-    return res.status(500).send({ message: 'Error in health API', status: 'error' });
+    res.status(c500).send({ ...health.error });
   }
 };

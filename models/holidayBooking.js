@@ -7,27 +7,29 @@ const holidayBookingSchema = new mongoose.Schema({
   },
   bookingNumber: {
     type: String,
-    required: false
+    required: true,
+    unique: true
   },
   departurePlaceLabel: {
     type: String,
-    required: false
+    required: true
   },
   destinationPlaceLabel: {
     type: String,
-    required: false
+    required: true
   },
   holidayDetailsEndDate: {
     type: String,
-    required: false
+    required: true
   },
   holidayDetailsStartDate: {
     type: String,
-    required: false
+    required: true
   },
   holidayId: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   packageDuration: {
     type: String,
@@ -35,7 +37,7 @@ const holidayBookingSchema = new mongoose.Schema({
   },
   packageName: {
     type: String,
-    required: false
+    required: true
   },
   paymentDetails: {
     type: Object,
@@ -43,7 +45,8 @@ const holidayBookingSchema = new mongoose.Schema({
   },
   userId: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   passengers: {
     type: Array,

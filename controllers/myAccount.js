@@ -1,26 +1,28 @@
-const User = require('../models/user');
+const { constant } = require('../constant');
+const { 
+  getUser,
+  saveInDB,
+} = require('../mongo');
 
 exports.myAccount = async (req, res) => {
+  const { c200, c500, yS, login, myAccount } = constant();
   try {
     const { username, email, phoneNumber, address, password, newPassword, isEnabledEmailNotification, paymentMethodType, type } = req.body;
-    const user = await User.findOne({ email });
+    const user = await getUser({ email });
 
-    if (user && type === 'EDIT_PROFILE') {
+    if (user && type === myAccount.editProfile) {
       if (username) {
         user.username = username;
       }
-      // if (email) {
-      //   user.email = email;
-      // }
       if (phoneNumber) {
         user.phoneNumber = phoneNumber;
       }
       if (address) {
         user.address = address;
       }
-      await user.save();
-      res.status(200).send({ 
-        status: 'success',
+      await saveInDB(user);
+      res.status(c200).send({ 
+        status: yS,
         userId: user._id,
         token: user.token, 
         username: user.username, 
@@ -28,38 +30,38 @@ exports.myAccount = async (req, res) => {
         phoneNumber: user.phoneNumber, 
         address: user.address,
       });
-    } else if (user && type === 'CHANGE_PASSWORD') {
+    } else if (user && type === myAccount.changePassword) {
       if (password && !(await user.comparePassword(password))) {
-        return res.status(200).send({ message: 'Invalid old password', status: 'success', invalidPassword: true });
+        res.status(c200).send({ ...login.invalid });
       }
       if (newPassword) {
         user.password = newPassword;
-        await user.save();
-        res.status(200).send({ message: 'Password changed successfully', status: 'success', passwordChanged: true });
+        await saveInDB(user);
+        res.status(c200).send({ ...myAccount.passwordChanged });
       }
-    } else if (user && type === 'NOTIFICATION_SETTINGS') {
+    } else if (user && type === myAccount.notificationSetings) { 
       if (isEnabledEmailNotification) {
         user.isEnabledEmailNotification = isEnabledEmailNotification;
       }
-      await user.save();
-      res.status(200).send({ 
-        status: 'success',
+      await saveInDB(user);
+      res.status(c200).send({ 
+        status: yS,
         isEnabledEmailNotification: user.isEnabledEmailNotification
       });
-    } else if (user && type === 'PAYMENT_METHOD') {
+    } else if (user && type === myAccount.paymentMethod) { 
       if (paymentMethodType) {
         user.paymentMethodType = paymentMethodType;
       }
-      await user.save();
-      res.status(200).send({ 
-        status: 'success',
+      await saveInDB(user);
+      res.status(c200).send({ 
+        status: yS,
         paymentMethodType: user.paymentMethodType
       });
     } else {
-      return res.status(500).send({ message: 'Issue in user data fetch', status: 'error' });
+      return res.status(c500).send({ ...myAccount.errorUser });
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).send({ message: 'Catch Error in myAccount Edit and Updates', status: 'error' });
+    return res.status(c500).send({ ...myAccount.error });
   }
 };

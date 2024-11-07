@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   address: {
     type: String,
@@ -37,7 +38,8 @@ const userSchema = new mongoose.Schema({
   },
   token: {
     type: String,
-    required: false
+    required: false,
+    unique: true
   }
 });
 

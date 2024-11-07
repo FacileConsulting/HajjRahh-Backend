@@ -15,7 +15,7 @@ const cabsSchema = new mongoose.Schema({
   },
   cabTime: {
     type: String,
-    required: false
+    required: true
   },
   cabPassengersCount: {
     type: Number,

@@ -1,11 +1,15 @@
-const User = require('../models/user');
-const Packages = require('../models/packages');
+const { constant } = require('../constant');
+const { 
+  getUser,
+  getAllPackages
+} = require('../mongo');
 
-// Get the user data
+
 exports.trips = async (req, res) => {
+  const { c200, c500, yS, trips } = constant();
   try {
     const getPackages = async (query) => {
-      const packages = await Packages.find(query);
+      const packages = await getAllPackages(query);
       return packages || [];
     }
 
@@ -32,28 +36,28 @@ exports.trips = async (req, res) => {
     }
 
     const { email } = req.body;
-    const user = await User.findOne({ email });    
+    const user = await getUser({ email });   
 
     if (!user) {
-      return res.status(200).send({ message: 'You are not loggedIn.', status: 'success', data: [] });
+      res.status(c200).send({ ...trips.notLoggedIn });
     } else {
       if (user.trips.length > 0) {
         const getPackgeIds = user.trips.map((trip) => trip.packageId);
         const query = { _id: { $in: getPackgeIds } };
         let packages = await getPackages(query);
-        if (!packages || packages.length == 0) {
-          return res.status(200).send({ message: 'Something went wrong. Please check with admin', status: 'success', data: [] });
+        if (!packages || packages.length == 0) { 
+          res.status(c200).send({ ...trips.failed });
         } else {
-          await res.status(200).send({
-            status: 'success',
+          await res.status(c200).send({
+            status: yS,
             data: constructTripsArray(packages),
           });
         }
       } else {
-        return res.status(200).send({ message: 'No Trips available', status: 'success', data: [] });
+        res.status(c200).send({ ...trips.noTrips });
       }
     }
   } catch (error) {
-    res.status(500).send({ message: 'Error in search holidays', status: 'error' });
+    res.status(c500).send({ ...trips.error });
   }
 };

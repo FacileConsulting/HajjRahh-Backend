@@ -1,28 +1,32 @@
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
+const { constant } = require('../constant');
+const { getToken } = require('../utils');
+const { 
+  getUser,
+  createUser,
+  saveInDB
+} = require('../mongo');
 
 exports.registerUser = async (req, res) => {
+  const { c200, c500, register } = constant();
   try {
     const { username, email, phoneNumber, address, password } = req.body;
     console.log("sdfdsfsdfdsfsdfdsfd", username, email, phoneNumber, address, password);    
 
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await getUser({ email });
     if (existingUser) {
-      return res.status(200).send({ message: 'User already registered. Please Sign In', status: 'success', isDups: true });
+      return res.status(c200).send({ ...register.noDups });
     }
 
-    // Create new user    
-    const newUser = new User({ username, email, phoneNumber, address, password, isEnabledEmailNotification: "emailEnabled" });
-    await newUser.save();
+    // Create new user 
+    const newUser = await createUser({ username, email, phoneNumber, address, password, isEnabledEmailNotification: "emailEnabled" });  
+    await saveInDB(newUser);
 
     // Send response with user data
-    const token = jwt.sign({ email: email }, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
-    return res.status(200).send({ 
-      message: 'User registered successfully', 
-      status: 'success', 
+    const token = getToken({ email });
+    return res.status(c200).send({ 
+      ...register.valid,
       userId: newUser._id,
-      userCreated: true,
       token, 
       username, 
       email, 
@@ -35,6 +39,6 @@ exports.registerUser = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    return res.status(500).send({ message: 'Error registering user', status: 'error' });
+    return res.status(c500).send({ ...register.error });
   }
 };
