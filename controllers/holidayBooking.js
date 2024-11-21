@@ -26,7 +26,7 @@ exports.checkHolidayBooking = async (req, res) => {
     }
 
     // Create a booking holiday  
-    const holidayBooking = await createHolidayBooking({ ...req.body, status: 'success', bookingNumber: generateRandom10DigitNumber() });
+    const holidayBooking = await createHolidayBooking({ ...req.body, status: yS, bookingNumber: generateRandom10DigitNumber() });
     await saveInDB(holidayBooking);
     res.status(c200).send({ data: holidayBooking, status: yS });
   } catch (error) {

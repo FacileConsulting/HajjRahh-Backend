@@ -14,11 +14,13 @@ const searchHolidaysRoute = require('./routes/searchHolidays');
 const searchCabsRoute = require('./routes/searchCabs');
 const tripsRoute = require('./routes/trips');
 const searchFlightsRoute = require('./routes/searchFlights'); 
-const searchAirportRoute = require('./routes/searchAirport');
+const searchAirportRoute = require('./routes/searchAirport'); 
+const vendorsRoute = require('./routes/vendors');
 const app = express();
 
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "100mb" })); // Increase the limit as needed
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(cookieParser());
 
 /**
@@ -47,6 +49,7 @@ app.use("/api/register", registerRoute);
 app.use("/api/searchCabs", searchCabsRoute);
 app.use("/api/searchFlights", searchFlightsRoute);
 app.use("/api/searchAirport", searchAirportRoute);
+app.use("/api/vendors", vendorsRoute);
 
 app.use("/api/holidayBooking", authMiddleware, holidayBookingRoute);
 app.use("/api/myAccount", authMiddleware, myAccountRoute);
@@ -56,6 +59,7 @@ app.use("/api/trips", authMiddleware, tripsRoute);
 console.log('PORT : ', process.env.PORT);
 const port = process.env.PORT;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Backend server is running! on ${port}`);
 });
+server.timeout = 60000; // 60 seconds

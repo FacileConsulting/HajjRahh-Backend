@@ -110,8 +110,8 @@ const constant = () => {
       changePassword: 'CHANGE_PASSWORD',
       notificationSetings: 'NOTIFICATION_SETTINGS',
       paymentMethod: 'PAYMENT_METHOD',
-      passwordChanged: { 
-        message: 'Password changed successfully', 
+      passwordChanged: {
+        message: 'Password changed successfully',
         passwordChanged: true,
         status: yS
       },
@@ -121,6 +121,56 @@ const constant = () => {
       },
       error: {
         message: 'Error in /myAccount',
+        status: nS
+      }
+    },
+    pilgrimageBooking: {
+      pilgrimageBookingCreate: 'PILGRIMAGE_BOOKING_CREATE',
+      pilgrimageBookingUpdate: 'PILGRIMAGE_BOOKING_UPDATE',
+      pilgrimageBookingFetchAll: 'PILGRIMAGE_BOOKING_FETCH_ALL',
+      pilgrimageBookingFetch: 'PILGRIMAGE_BOOKING_FETCH',
+      pilgrimageBookingDelete: 'PILGRIMAGE_BOOKING_DELETE',
+      deleted: {
+        message: 'Package deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noPackage: {
+        message: 'Package does not exit. Contact Admin',
+        noPackage: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Package',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Pilgrimage Booking Package updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Package does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Pilgrimage Booking Package created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /pilgrimageBooking method',
         status: nS
       }
     }
