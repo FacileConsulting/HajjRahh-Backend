@@ -1,3 +1,5 @@
+const packageManagement = require("./models/packageManagement");
+
 const constant = () => {
   const yS = 'success';
   const nS = 'error';
@@ -124,12 +126,12 @@ const constant = () => {
         status: nS
       }
     },
-    pilgrimageBooking: {
-      pilgrimageBookingCreate: 'PILGRIMAGE_BOOKING_CREATE',
-      pilgrimageBookingUpdate: 'PILGRIMAGE_BOOKING_UPDATE',
-      pilgrimageBookingFetchAll: 'PILGRIMAGE_BOOKING_FETCH_ALL',
-      pilgrimageBookingFetch: 'PILGRIMAGE_BOOKING_FETCH',
-      pilgrimageBookingDelete: 'PILGRIMAGE_BOOKING_DELETE',
+    packageManagement: {
+      packageManagementCreate: 'PACKAGE_MANAGEMENT_CREATE',
+      packageManagementUpdate: 'PACKAGE_MANAGEMENT_UPDATE',
+      packageManagementFetchAll: 'PACKAGE_MANAGEMENT_FETCH_ALL',
+      packageManagementFetch: 'PACKAGE_MANAGEMENT_FETCH',
+      packageManagementDelete: 'PACKAGE_MANAGEMENT_DELETE',
       deleted: {
         message: 'Package deleted successfully',
         deleted: true,
@@ -162,6 +164,56 @@ const constant = () => {
       },
       created: {
         message: 'Pilgrimage Booking Package created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /pilgrimageBooking method',
+        status: nS
+      }
+    },
+    pilgrimageBooking: {
+      pilgrimageBookingCreate: 'PILGRIMAGE_BOOKING_CREATE',
+      pilgrimageBookingUpdate: 'PILGRIMAGE_BOOKING_UPDATE',
+      pilgrimageBookingFetchAll: 'PILGRIMAGE_BOOKING_FETCH_ALL',
+      pilgrimageBookingFetch: 'PILGRIMAGE_BOOKING_FETCH',
+      pilgrimageBookingDelete: 'PILGRIMAGE_BOOKING_DELETE',
+      deleted: {
+        message: 'Booking deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noPackage: {
+        message: 'Booked package does not exit. Contact Admin',
+        noPackage: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in booked package',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Pilgrimage Booking updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Booked package does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Pilgrimage Booking created successfully',
         created: true,
         status: yS
       },

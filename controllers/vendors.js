@@ -3,14 +3,14 @@ const {
   createPilgrimageBooking,
   getPilgrimageBooking,
   getAllPilgrimageBooking,
+  getAllPackageManagement,
   deletePilgrimageBooking,
   updatePilgrimageBooking,
   saveInDB,
 } = require('../mongo');
 
 exports.vendors = async (req, res) => {
-  const { c200, c500, yS, pilgrimageBooking } = constant();
-  // console.log('###############3333333333333', req.body);
+  const { c200, c500, yS, pilgrimageBooking, packageManagement } = constant();
   try {
     const {
       type,
@@ -108,6 +108,18 @@ exports.vendors = async (req, res) => {
         return res.status(c200).send({ ...pilgrimageBooking.deleted });
       } else {
         return res.status(c200).send({ ...pilgrimageBooking.notFound });
+      }
+    } else if (type === packageManagement.packageManagementFetchAll) {
+      // console.log('###############3333333333333***********@@@@@@@@@');
+      const result = await getAllPackageManagement();
+      // console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...packageManagement.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
       }
     } else {
       return res.status(c500).send({ ...pilgrimageBooking.errorType });

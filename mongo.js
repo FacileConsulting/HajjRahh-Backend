@@ -3,6 +3,7 @@ const User = require('./models/user');
 const HolidayBooking = require('./models/holidayBooking');
 const Packages = require('./models/packages');
 const PilgrimageBooking = require('./models/pilgrimageBooking');
+const PackageManagement = require('./models/packageManagement');
 
 const getUser = async (query) => {
   return await User.findOne(query);
@@ -18,7 +19,11 @@ const getAllPackages = async (query) => {
 
 const getAllPilgrimageBooking = async (query, inOut) => {
   return await PilgrimageBooking.find(query, inOut);
-} 
+}  
+
+const getAllPackageManagement = async (query) => {
+  return await PackageManagement.find(query);
+}
 
 const getPilgrimageBooking = async (query) => {
   return await PilgrimageBooking.findOne(query);
@@ -54,6 +59,7 @@ module.exports = {
   getPilgrimageBooking,
   getAllPackages,
   getAllPilgrimageBooking,
+  getAllPackageManagement,
   deletePilgrimageBooking,
   updatePilgrimageBooking,
   createHolidayBooking,
