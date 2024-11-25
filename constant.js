@@ -148,7 +148,7 @@ const constant = () => {
         status: yS
       },
       updated: {
-        message: 'Pilgrimage Booking Package updated successfully',
+        message: 'Package updated successfully',
         updated: true,
         status: yS
       },
@@ -163,7 +163,7 @@ const constant = () => {
         status: yS
       },
       created: {
-        message: 'Pilgrimage Booking Package created successfully',
+        message: 'Package created successfully',
         created: true,
         status: yS
       },
@@ -172,7 +172,7 @@ const constant = () => {
         status: nS
       },
       error: {
-        message: 'Error in /pilgrimageBooking method',
+        message: 'Error in /packageManagement method',
         status: nS
       }
     },

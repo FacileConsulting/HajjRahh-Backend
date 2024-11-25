@@ -5,10 +5,6 @@ const PackageManagementSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  packMangItinerary: {
-    type: String,
-    required: true
-  },
   packMangPrice: {
     type: String,
     required: true
@@ -22,13 +18,33 @@ const PackageManagementSchema = new mongoose.Schema({
     required: true
   },
   packMangAccomodation: {
-    type: Number,
+    type: String,
     required: true
   },
   packMangTransportation: {
     type: String,
     required: true
-  }
+  },
+  packMangHajjDates: {
+    type: String,
+    required: true
+  },
+  packMangUmrahDates: {
+    type: String,
+    required: true
+  },
+  packMangItineraryList: {
+    type: Array,
+    required: true
+  },
+  packMangInclusion: {
+    type: String,
+    required: true
+  },
+  packMangExclusion: {
+    type: String,
+    required: true
+  },
 });
 
 module.exports = mongoose.model('PackageManagement', PackageManagementSchema);

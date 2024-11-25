@@ -1,11 +1,15 @@
 const { constant } = require('../constant');
 const {
   createPilgrimageBooking,
+  createPackageManagement,
   getPilgrimageBooking,
+  getPackageManagement,
   getAllPilgrimageBooking,
   getAllPackageManagement,
   deletePilgrimageBooking,
+  deletePackageManagement,
   updatePilgrimageBooking,
+  updatePackageManagement,
   saveInDB,
 } = require('../mongo');
 
@@ -24,7 +28,19 @@ exports.vendors = async (req, res) => {
       pilBookFromDate,
       pilBookToDate,
       pilBookTravelersList,
-      pilgrimageBookingId
+      pilgrimageBookingId,
+      packMangPackageName,
+      packMangPrice,
+      packMangGroupSize,
+      packMangAccomodation,
+      packMangDocumentsRequired,
+      packMangTransportation,
+      packMangHajjDates,
+      packMangUmrahDates,
+      packMangInclusion,
+      packMangExclusion,  
+      packMangItineraryList,
+      packageManagementId,
     } = req.body;
 
     if (type === pilgrimageBooking.pilgrimageBookingCreate) {
@@ -109,6 +125,74 @@ exports.vendors = async (req, res) => {
       } else {
         return res.status(c200).send({ ...pilgrimageBooking.notFound });
       }
+    } else if (type === packageManagement.packageManagementUpdate) {
+      console.log('!!!!!!!!!!!@@!@!@', packageManagement.packageManagementUpdate);
+      // Update exist pilgrimage booking data
+      const result = await updatePackageManagement(packageManagementId, {
+        packMangPackageName,
+        packMangPrice,
+        packMangGroupSize,
+        packMangAccomodation,
+        packMangDocumentsRequired,
+        packMangTransportation,
+        packMangHajjDates,
+        packMangUmrahDates,
+        packMangInclusion,
+        packMangExclusion,  
+        packMangItineraryList
+      });     
+      
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...packageManagement.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...packageManagement.notUpdated });
+      } else {
+        return res.status(c200).send({ ...packageManagement.notFound });
+      }
+    } else if (type === packageManagement.packageManagementFetch) {
+
+      // Fetch packageManagement data
+      const result = await getPackageManagement({ _id: packageManagementId });
+      // console.log('###############packageManagement', result);
+
+      if (!result) {
+        return res.status(c200).send({ ...packageManagement.noPackage });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result || false
+        });
+      }
+    } else if (type === packageManagement.packageManagementDelete) {
+
+      // Delete the document by ID
+      const result = await deletePackageManagement(packageManagementId);
+      // console.log("$$$$$$$$$delte", result);
+      if (result.deletedCount === 1) {
+        return res.status(c200).send({ ...packageManagement.deleted });
+      } else {
+        return res.status(c200).send({ ...packageManagement.notFound });
+      }
+    }else if (type === packageManagement.packageManagementCreate) {
+
+      // Create new pilgrimage booking data
+      const newPackageManagement = await createPackageManagement({
+        packMangPackageName,
+        packMangPrice,
+        packMangGroupSize,
+        packMangAccomodation,
+        packMangDocumentsRequired,
+        packMangTransportation,
+        packMangHajjDates,
+        packMangUmrahDates,
+        packMangInclusion,
+        packMangExclusion,  
+        packMangItineraryList
+      });
+      await saveInDB(newPackageManagement);
+
+      res.status(c200).send({ ...packageManagement.created });
     } else if (type === packageManagement.packageManagementFetchAll) {
       // console.log('###############3333333333333***********@@@@@@@@@');
       const result = await getAllPackageManagement();
