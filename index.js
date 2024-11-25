@@ -27,7 +27,7 @@ app.use(cookieParser());
  * Used to switch between prod and dev origin url
  * You can update the methods as per needs
  */
-// const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
+const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
 // const apiUrl = "http://localhost:8000";
 app.use(cors({
   // origin: "http://localhost:8000",
@@ -57,7 +57,7 @@ app.use("/api/searchHolidays", authMiddleware, searchHolidaysRoute);
 app.use("/api/trips", authMiddleware, tripsRoute);
 
 console.log('PORT : ', process.env.PORT);
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
 const server = app.listen(port, () => {
   console.log(`Backend server is running! on ${port}`);
