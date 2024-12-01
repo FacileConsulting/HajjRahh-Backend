@@ -53,7 +53,7 @@ exports.searchPackages = async (req, res) => {
 
     if (req.body.fromHoliday) {
       console.log('greater', req.body.fromHoliday)
-      var { flyingFrom: departure, flyingTo: destination, flightDepartureDateNotReversed: startDate, sacredType, foodType, trip3, trip4, trip7, trip11, trip16, star5, star4, star3, transBus, transLandOnly, transFlight, transCruise, transOptional, themeAdventure, themeAffordable, themeArtCulture, themeBeach, themeBestSeller, priceLt1000, priceGt1000, priceGt2000, priceGt4000, priceGt8000, tourFocus1, tourFocus2, tourFocus3, tourFocus4, tourFocus5, languageHindi, languageEnglish, languageArabic, meals1, meals2, meals3, meals4, meals5, vehicleTypeHatchback, vehicleTypeSedan, vehicleTypeSUV, vehicleTypeMUV, vehicleTypeCompactSUV, sp1, sp2, sp3, sp4, sp5 } = req.body;
+      var { flyingFrom: departure, flyingTo: destination, flightDepartureDateNotReversed: startDate, trip3, trip4, trip7, trip11, trip16, star5, star4, star3, transBus, transLandOnly, transFlight, transCruise, transOptional, themeAdventure, themeAffordable, themeArtCulture, themeBeach, themeBestSeller, priceLt1000, priceGt1000, priceGt2000, priceGt4000, priceGt8000, tourFocus1, tourFocus2, tourFocus3, tourFocus4, tourFocus5, languageHindi, languageEnglish, languageArabic, meals1, meals2, meals3, meals4, meals5, vehicleTypeHatchback, vehicleTypeSedan, vehicleTypeSUV, vehicleTypeMUV, vehicleTypeCompactSUV, sp1, sp2, sp3, sp4, sp5 } = req.body;
     } else {
       var { departure, destination, startDate, endDate, trip3, trip4, trip7, trip11, trip16, star5, star4, star3, transBus, transLandOnly, transFlight, transCruise, transOptional, themeAdventure, themeAffordable, themeArtCulture, themeBeach, themeBestSeller, priceLt1000, priceGt1000, priceGt2000, priceGt4000, priceGt8000, tourFocus1, tourFocus2, tourFocus3, tourFocus4, tourFocus5, languageHindi, languageEnglish, languageArabic, meals1, meals2, meals3, meals4, meals5, vehicleTypeHatchback, vehicleTypeSedan, vehicleTypeSUV, vehicleTypeMUV, vehicleTypeCompactSUV, sp1, sp2, sp3, sp4, sp5 } = req.body;
     }
@@ -206,22 +206,6 @@ exports.searchPackages = async (req, res) => {
       return getValues;
     }
 
-    const switchFoodType = (type) => {
-      if (type === 'veg') {
-        return 'Veg';
-      } else if (type === 'nonVeg') {
-        return 'Non Veg';
-      }
-    }
-    
-    const switchSacredType = (type) => {
-      if (type === 'umrah') {
-        return 'Umrah';
-      } else if (type === 'hajj') {
-        return 'Hajj';
-      }
-    }
-
     let query = {};
     if ( 
       trip3 || trip4 || trip7 || trip11 || trip16 || 
@@ -247,12 +231,6 @@ exports.searchPackages = async (req, res) => {
       if (destination) {
         const ob = destinationArray.find( obj => obj.value === destination);
         query.destination = ob.label;
-      }
-      if (sacredType) {
-        query.sacred = switchSacredType(sacredType);
-      }
-      if (foodType) {
-        query.food = switchFoodType(foodType);
       }
       if (startDate) {
         query.dateRange = startDate;
