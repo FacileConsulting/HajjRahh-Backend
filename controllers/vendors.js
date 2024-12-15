@@ -12,12 +12,25 @@ const {
   updatePackageManagement,
   saveInDB,
 } = require('../mongo');
+const { callAxiosInstance } = require('../middleware/axios');
+const { otpConfig, otpVerifyConfig } = require('../utils');
 
 exports.vendors = async (req, res) => {
-  const { c200, c500, yS, pilgrimageBooking, packageManagement } = constant();
+  const { 
+    otpURL,
+    c200, 
+    c500, 
+    yS, 
+    nS,
+    pilgrimageBooking, 
+    packageManagement, 
+    vendorsLogin 
+  } = constant();  
+  const axiosInstance = callAxiosInstance(otpURL);
   try {
     const {
       type,
+      userMobile,
       pilBookVendorName,
       pilBookMobile,
       pilBookEmail,
@@ -41,12 +54,49 @@ exports.vendors = async (req, res) => {
       packMangExclusion,  
       packMangItineraryList,
       packageManagementId,
+      mobile,
+      otp
     } = req.body;
+    console.log('mobile, otp', type, mobile, otp);
+    if (type === vendorsLogin.login && mobile && !otp ) {
+      
+      const config = otpConfig({ url: otpURL, mobile });
+      // console.log('responsevenconfigdos', config);
+      const response = await axiosInstance.request(config);
+      // console.log('responsevendos', response);
+      const { status, data } = response;
+      // console.log('responsevestatus, datastatus, data ndos', status, data);
 
-    if (type === pilgrimageBooking.pilgrimageBookingCreate) {
+      // res.status(c200).send({ ...vendorsLogin.isOTP });
+      if (data.status === yS && data.transactionId) {
+        return res.status(c200).send({ ...vendorsLogin.isOTP });
+      } else if ('error' === data.split('|')[0].split('=')[1].trim() && data.split('|')[1].split('=')[0].trim() === 'errorCode' && data.split('|')[2].split('=')[0].trim() === 'reason') {
+        return res.status(c200).send({ ...vendorsLogin.noOTP, message: data.split('|')[2].split('=')[1].trim() });
+      } else {
+        return res.status(c200).send({ ...vendorsLogin.noOTP });
+      }
+    } else if (type === vendorsLogin.login && mobile && otp ) {
+      
+      const config = otpVerifyConfig({ url: otpURL, mobile, otp });
+      const response = await axiosInstance.request(config);
+      // console.log('responsevendos ewewewr', response);
+      const { status, data } = response;
+      // console.log('responsevestatus, datastatus, datawerwer ndoswerwrw', status, data);
+      // return res.status(c200).send({ ...vendorsLogin.verified });
+      if (data.status === yS && data.transactionId) {
+        return res.status(c200).send({ ...vendorsLogin.verified });
+      } else if (data.status === nS && data.statusCode === '307') {
+        return res.status(c200).send({ ...vendorsLogin.expired })
+      } else if (data.status === nS && data.statusCode === '309') {
+        return res.status(c200).send({ ...vendorsLogin.expired, message: data.reason })
+      } else {
+        return res.status(c200).send({ ...vendorsLogin.notVerified });
+      }
+    } else if (type === pilgrimageBooking.pilgrimageBookingCreate) {
 
       // Create new pilgrimage booking data
       const newPilgrimageBooking = await createPilgrimageBooking({
+        userMobile,
         pilBookVendorName,
         pilBookMobile,
         pilBookEmail,
@@ -65,6 +115,7 @@ exports.vendors = async (req, res) => {
       console.log('!!!!!!!!!!!@@!@!@', pilgrimageBooking.pilgrimageBookingUpdate);
       // Update exist pilgrimage booking data
       const result = await updatePilgrimageBooking(pilgrimageBookingId, {
+        userMobile,
         pilBookVendorName,
         pilBookMobile,
         pilBookEmail,
@@ -129,6 +180,7 @@ exports.vendors = async (req, res) => {
       console.log('!!!!!!!!!!!@@!@!@', packageManagement.packageManagementUpdate);
       // Update exist pilgrimage booking data
       const result = await updatePackageManagement(packageManagementId, {
+        userMobile,
         packMangPackageName,
         packMangPrice,
         packMangGroupSize,
@@ -174,10 +226,11 @@ exports.vendors = async (req, res) => {
       } else {
         return res.status(c200).send({ ...packageManagement.notFound });
       }
-    }else if (type === packageManagement.packageManagementCreate) {
+    } else if (type === packageManagement.packageManagementCreate) {
 
       // Create new pilgrimage booking data
       const newPackageManagement = await createPackageManagement({
+        userMobile,
         packMangPackageName,
         packMangPrice,
         packMangGroupSize,

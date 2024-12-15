@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const PilgrimageBookingSchema = new mongoose.Schema({ 
+  userMobile: {
+    type: String,
+    required: true
+  },
   pilBookVendorName: {
     type: String,
     required: true

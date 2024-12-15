@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
+const user = require('./user');
 
 const PackageManagementSchema = new mongoose.Schema({ 
+  userMobile: {
+    type: String,
+    required: true
+  },
   packMangPackageName: {
     type: String,
     required: true
   },
   packMangPrice: {
-    type: String,
+    type: Array,
     required: true
   },
   packMangGroupSize: {
@@ -18,7 +23,7 @@ const PackageManagementSchema = new mongoose.Schema({
     required: true
   },
   packMangAccomodation: {
-    type: String,
+    type: Array,
     required: true
   },
   packMangTransportation: {

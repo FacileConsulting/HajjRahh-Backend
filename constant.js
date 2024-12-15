@@ -1,9 +1,9 @@
-const packageManagement = require("./models/packageManagement");
-
 const constant = () => {
+  const otpURL = 'https://unify.smsgateway.center/SMSApi/otp';
   const yS = 'success';
   const nS = 'error';
   return {
+    otpURL,
     c200: 200,
     c500: 500,
     yS,
@@ -225,7 +225,43 @@ const constant = () => {
         message: 'Error in /pilgrimageBooking method',
         status: nS
       }
-    }
+    },
+    vendorsLogin: {
+      login: 'VENDORS_LOGIN',
+      isOTP: {
+        message: 'OTP sent successfully',
+        isOTP: true,
+        status: yS
+      },
+      noOTP: {
+        message: 'OTP not generated. Please try again',
+        noOTP: true,
+        status: nS
+      },
+      verified: {
+        message: 'OTP verified',
+        verified: true,
+        status: yS
+      },
+      expired: {
+        message: 'OTP token is expired',
+        expired: true,
+        status: yS
+      },
+      notVerified: {
+        message: 'OTP verification failed. Resend OTP',
+        notVerified: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors login API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /login method',
+        status: nS
+      }
+    },
   }
 }
 
