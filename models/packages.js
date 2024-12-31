@@ -29,10 +29,6 @@ const packagesSchema = new mongoose.Schema({
     type: Number,
     required: false
   },
-  isZiyarat: {
-    type: Boolean,
-    required: false
-  },
   price: {
     type: Number,
     required: true
@@ -70,10 +66,6 @@ const packagesSchema = new mongoose.Schema({
     required: false
   },
   specialAmenities: {
-    type: Array,
-    required: false
-  },
-  facilities: {
     type: Array,
     required: false
   },

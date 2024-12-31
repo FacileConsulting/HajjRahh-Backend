@@ -176,6 +176,56 @@ const constant = () => {
         status: nS
       }
     },
+    hotelBooking: {
+      hotelBookingCreate: 'HOTEL_BOOKING_CREATE',
+      hotelBookingUpdate: 'HOTEL_BOOKING_UPDATE',
+      hotelBookingFetchAll: 'HOTEL_BOOKING_FETCH_ALL',
+      hotelBookingFetch: 'HOTEL_BOOKING_FETCH',
+      hotelBookingDelete: 'HOTEL_BOOKING_DELETE',
+      deleted: {
+        message: 'Booked Hotel deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noHotel: {
+        message: 'Booked Hotel does not exit. Contact Admin',
+        noPackage: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in booked hotel',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Hotel Booking updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Booked hotel does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Hotel Booked created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /hotelBooking method',
+        status: nS
+      }
+    },
     pilgrimageBooking: {
       pilgrimageBookingCreate: 'PILGRIMAGE_BOOKING_CREATE',
       pilgrimageBookingUpdate: 'PILGRIMAGE_BOOKING_UPDATE',

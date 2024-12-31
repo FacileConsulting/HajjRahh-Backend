@@ -10,6 +10,42 @@ const getToken = (query) => {
   return jwt.sign(query, process.env.JWT_SECRET, { expiresIn: '1h' });
 }
 
+const hotelConfig = (obj) => {
+  return {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url:  `${process.env.AMADEUS_TEST_URL}${obj.url}keyword=${obj.hotelSearch}&subType=${obj.hotelTypeKey}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${global.amadeus_access_token}`
+    }
+  };
+}
+
+const hotelDetailsConfig = (obj) => {
+  return {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url:  `${process.env.AMADEUS_TEST_URL}${obj.url}hotelIds=${obj.hotelBookingId}&adults=1`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${global.amadeus_access_token}`
+    }
+  };
+}
+
+const hotelRatingConfig = (obj) => {
+  return {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url:  `${process.env.AMADEUS_TEST_URL}${obj.url}hotelIds=${obj.hotelBookingId}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${global.amadeus_access_token}`
+    }
+  };
+}
+
 const amadeusConfig = (obj) => {
   return {
     method: 'get',
@@ -78,5 +114,8 @@ module.exports = {
   amadeusConfig,
   otpConfig,
   otpVerifyConfig,
+  hotelConfig,
+  hotelDetailsConfig,
+  hotelRatingConfig,
   generateRandom10DigitNumber
 };

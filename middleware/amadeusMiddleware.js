@@ -3,6 +3,9 @@ const { callAxiosInstance } = require('./axios');
 const amadeusTokenURL = '/v1/security/oauth2/token';
 const amadeusFlightsURL = '/v2/shopping/flight-offers?';
 const amadeusAirportURL = '/v1/reference-data/locations?';
+const amadeusHotelURL = '/v1/reference-data/locations/hotel?';
+const amadeusHotelDetailsURL = '/v3/shopping/hotel-offers?';
+const amadeusHotelRatingURL = '/v2/e-reputation/hotel-sentiments?';
 
 const axiosInstance = callAxiosInstance(process.env.AMADEUS_TEST_URL, global.amadeus_access_token);
 
@@ -58,6 +61,9 @@ axiosInstance.interceptors.response.use(
 module.exports = {
   amadeusFlightsURL,
   amadeusAirportURL,
+  amadeusHotelURL,
+  amadeusHotelDetailsURL,
+  amadeusHotelRatingURL,
   axiosInstance,
   refreshAmadeusToken
 };

@@ -1,4 +1,5 @@
 const Packages = require('../models/packages');
+const PackageManagement = require('../models/packageManagement');
 
 // Get the user data
 exports.searchPackages = async (req, res) => {
@@ -330,7 +331,7 @@ exports.searchPackages = async (req, res) => {
     // query = { departure: 'Mumbai', destination: 'Kaaba', dateRange: '13-9-2024' }
     // query = { departure: 'Mumbai', destination: 'Abu Dhabi', dateRange: '25-10-2024'  }
     // console.log('query', query);
-    const packages = await Packages.find(query);
+    const packages = await PackageManagement.find(query);
     console.log('departurepackages', packages.length);
     if (!packages) {
       return res.status(200).send({ message: 'No search for holidays', status: 'success', data: [] });
