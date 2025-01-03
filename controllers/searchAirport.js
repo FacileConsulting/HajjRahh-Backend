@@ -10,11 +10,12 @@ exports.searchAirport = async (req, res) => {
   const { c200, c500, yS, airport } = constant();
   try {
     const { codes } = req.body;    
-    const url = `${process.env.AMADEUS_TEST_URL}${amadeusAirportURL}subType=AIRPORT&keyword=${codes.split('-')[0]}&countryCode=${codes.split('-')[1]}`;
+    const url = `https://test.api.amadeus.com${amadeusAirportURL}subType=AIRPORT&keyword=${codes.split('-')[0]}&countryCode=${codes.split('-')[1]}`;
     
     const config = amadeusConfig({ url });
 
     const callingforSearchAirport = async() => {
+      await refreshAmadeusToken();
       const response = await axiosInstance.request(config);
       console.log('##@#response', response?.data?.data[0], Object.keys(response.data));
       const data = response?.data?.data.length > 0 ? response?.data?.data[0].name : '';
