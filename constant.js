@@ -80,7 +80,7 @@ const constant = () => {
         invalidPassword: true,
         status: yS
       },
-      notReg: {
+      invalidUser: {
         message: 'User not registered',
         invalidUser: true,
         status: yS
