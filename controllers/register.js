@@ -24,10 +24,9 @@ exports.registerUser = async (req, res) => {
 
     // Send response with user data
     const token = getToken({ email });
-    return res.status(c200).send({ 
+    const obj = { 
       ...register.valid,
       userId: newUser._id,
-      token, 
       username, 
       email, 
       phoneNumber, 
@@ -35,7 +34,13 @@ exports.registerUser = async (req, res) => {
       isEnabledEmailNotification: 'emailEnabled',
       paymentMethodType: [], 
       trips: []
-    });
+    };
+    if (token) {
+      obj.token = token;
+      return res.status(c200).send(obj);
+    } else {
+      return res.status(c200).send(obj);
+    }
 
   } catch (error) {
     console.error(error);
