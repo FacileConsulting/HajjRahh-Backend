@@ -204,7 +204,7 @@ exports.vendors = async (req, res) => {
       const config = otpConfig({ url: otpURL, mobile });
       // console.log('responsevenconfigdos', config);
       const response = await axiosInstance.request(config);
-      // console.log('responsevendos', response);
+      console.log('responsevendos', response);
       const { status, data } = response;
       // console.log('responsevestatus, datastatus, data ndos', status, data);
 
@@ -220,7 +220,7 @@ exports.vendors = async (req, res) => {
 
       const config = otpVerifyConfig({ url: otpURL, mobile, otp });
       const response = await axiosInstance.request(config);
-      // console.log('responsevendos ewewewr', response);
+      console.log('responsevendos ewewewr', response);
       const { status, data } = response;
       // console.log('responsevestatus, datastatus, datawerwer ndoswerwrw', status, data);
       // return res.status(c200).send({ ...vendorsLogin.verified });
