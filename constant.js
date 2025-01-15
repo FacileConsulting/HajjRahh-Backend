@@ -176,6 +176,56 @@ const constant = () => {
         status: nS
       }
     },
+    cab: {
+      cabPromotionCreate: 'CAB_PROMOTION_CREATE',
+      cabPromotionUpdate: 'CAB_PROMOTION_UPDATE',
+      cabPromotionFetchAll: 'CAB_PROMOTION_FETCH_ALL',
+      cabPromotionFetch: 'CAB_PROMOTION_FETCH',
+      cabPromotionDelete: 'CAB_PROMOTION_DELETE',
+      deleted: {
+        message: 'Cab Promotion deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noCabPromotion: {
+        message: 'Cab Promotion does not exit. Contact Admin',
+        noCabPromotion: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Cab Promotion',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Cab Promotion updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Cab Promotion does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Cab Promotion created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /cabPromotion method',
+        status: nS
+      }
+    },
     hotelBooking: {
       hotelBookingCreate: 'HOTEL_BOOKING_CREATE',
       hotelBookingUpdate: 'HOTEL_BOOKING_UPDATE',

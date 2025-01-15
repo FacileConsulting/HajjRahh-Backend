@@ -2,18 +2,23 @@ const { constant } = require('../constant');
 const {
   createPilgrimageBooking,
   createHotelBooking,
+  createCabPromotion,
   createPackageManagement,
   getPilgrimageBooking,
   getHotelBooking,
+  getCabPromotion,
   getPackageManagement,
   getAllPilgrimageBooking,
   getAllHotelBooking,
+  getAllCabPromotion,
   getAllPackageManagement,
   deletePilgrimageBooking,
   deleteHotelBooking,
+  deleteCabPromotion,
   deletePackageManagement,
   updatePilgrimageBooking,
   updateHotelBooking,
+  updateCabPromotion,
   updatePackageManagement,
   saveInDB,
 } = require('../mongo');
@@ -26,7 +31,13 @@ const {
 } = require('../middleware/amadeusMiddleware');
 
 const { callAxiosInstance } = require('../middleware/axios');
-const { otpConfig, otpVerifyConfig, hotelConfig, hotelDetailsConfig, hotelRatingConfig } = require('../utils');
+const { 
+  otpConfig, 
+  otpVerifyConfig, 
+  hotelConfig, 
+  hotelDetailsConfig, 
+  hotelRatingConfig 
+} = require('../utils');
 
 exports.vendors = async (req, res) => {
   const {
@@ -38,6 +49,7 @@ exports.vendors = async (req, res) => {
     pilgrimageBooking,
     hotelBooking,
     packageManagement,
+    cab,
     vendorsLogin
   } = constant();
   const axiosInstance = callAxiosInstance(otpURL);
@@ -91,6 +103,11 @@ exports.vendors = async (req, res) => {
       packMangExclusion,
       packMangItineraryList,
       packageManagementId,
+      cabPromotionId,
+      cabPromoCode,
+      cabPromoType,
+      cabAssignTo,
+      cabPromoEngine,
       mobile,
       otp
     } = req.body;
@@ -516,6 +533,65 @@ exports.vendors = async (req, res) => {
         res.status(c200).send({ ...packageManagement.failed });
       } else {
         
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === cab.cabPromotionUpdate) {
+      // Update exist pilgrimage booking data
+      const result = await updateCabPromotion(cabPromotionId, {      
+        cabPromoCode,
+        cabPromoType,
+        cabAssignTo,
+        cabPromoEngine
+      });
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...cab.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...cab.notUpdated });
+      } else {
+        return res.status(c200).send({ ...cab.notFound });
+      }
+    } else if (type === cab.cabPromotionFetch) {
+      const result = await getCabPromotion({ _id: cabPromotionId });
+
+      if (!result) {
+        return res.status(c200).send({ ...cab.noCabPromotion });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result || false
+        });
+      }
+    } else if (type === cab.cabPromotionDelete) {
+      // Delete the document by ID
+      const result = await deleteCabPromotion(cabPromotionId);
+      // console.log("$$$$$$$$$delte", result);
+      if (result.deletedCount === 1) {
+        return res.status(c200).send({ ...cab.deleted });
+      } else {
+        return res.status(c200).send({ ...cab.notFound });
+      }
+    } else if (type === cab.cabPromotionCreate) {
+      // Create new pilgrimage booking data
+      const newCabPromotion = await createCabPromotion({
+        cabPromoCode,
+        cabPromoType,
+        cabAssignTo,
+        cabPromoEngine
+      });
+      await saveInDB(newCabPromotion);
+
+      res.status(c200).send({ ...cab.created });
+    } else if (type === cab.cabPromotionFetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllCabPromotion();
+      // console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...cab.failed });
+      } else {
         res.status(c200).send({
           status: yS,
           data: result
