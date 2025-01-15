@@ -226,6 +226,56 @@ const constant = () => {
         status: nS
       }
     },
+    fleet: {
+      fleetManagementCreate: 'FLEET_MANAGEMENT_CREATE',
+      fleetManagementUpdate: 'FLEET_MANAGEMENT_UPDATE',
+      fleetManagementFetchAll: 'FLEET_MANAGEMENT_FETCH_ALL',
+      fleetManagementFetch: 'FLEET_MANAGEMENT_FETCH',
+      fleetManagementDelete: 'FLEET_MANAGEMENT_DELETE',
+      deleted: {
+        message: 'Fleet Management deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noFleetManagement: {
+        message: 'Fleet Management does not exit. Contact Admin',
+        noCabPromotion: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Fleet Management',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Fleet Management updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Fleet Management does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Fleet Management created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /fleetManagement method',
+        status: nS
+      }
+    },
     hotelBooking: {
       hotelBookingCreate: 'HOTEL_BOOKING_CREATE',
       hotelBookingUpdate: 'HOTEL_BOOKING_UPDATE',

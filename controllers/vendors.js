@@ -21,6 +21,11 @@ const {
   updateCabPromotion,
   updatePackageManagement,
   saveInDB,
+  getAllFleetManagement,
+  createFleetManagement,
+  deleteFleetManagement,
+  getFleetManagement,
+  updateFleetManagement,
 } = require('../mongo');
 
 const {
@@ -50,6 +55,7 @@ exports.vendors = async (req, res) => {
     hotelBooking,
     packageManagement,
     cab,
+    fleet,
     vendorsLogin
   } = constant();
   const axiosInstance = callAxiosInstance(otpURL);
@@ -108,6 +114,15 @@ exports.vendors = async (req, res) => {
       cabPromoType,
       cabAssignTo,
       cabPromoEngine,
+      fleetManagementId,
+      cabVehicleName,
+      cabAssignDriver,
+      cabVehicleType,
+      cabVehicleNumber,
+      cabVehicleSeating,
+      cabVehicleFeatures,
+      cabAirportPricing,
+      cabCityTourPricing,
       mobile,
       otp
     } = req.body;
@@ -591,6 +606,73 @@ exports.vendors = async (req, res) => {
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...cab.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === fleet.fleetManagementUpdate) {
+      // Update exist pilgrimage booking data
+      const result = await updateFleetManagement(fleetManagementId, {      
+        cabVehicleName,
+        cabAssignDriver,
+        cabVehicleType,
+        cabVehicleNumber,
+        cabVehicleSeating,
+        cabVehicleFeatures,
+        cabAirportPricing,
+        cabCityTourPricing
+      });
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...fleet.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...fleet.notUpdated });
+      } else {
+        return res.status(c200).send({ ...fleet.notFound });
+      }
+    } else if (type === fleet.fleetManagementFetch) {
+      const result = await getFleetManagement({ _id: fleetManagementId });
+
+      if (!result) {
+        return res.status(c200).send({ ...fleet.noFleetManagement });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result || false
+        });
+      }
+    } else if (type === fleet.fleetManagementDelete) {
+      // Delete the document by ID
+      const result = await deleteFleetManagement(fleetManagementId);
+      // console.log("$$$$$$$$$delte", result);
+      if (result.deletedCount === 1) {
+        return res.status(c200).send({ ...fleet.deleted });
+      } else {
+        return res.status(c200).send({ ...fleet.notFound });
+      }
+    } else if (type === fleet.fleetManagementCreate) {
+      // Create new pilgrimage booking data
+      const newFleetManagement = await createFleetManagement({
+        cabVehicleName,
+        cabAssignDriver,
+        cabVehicleType,
+        cabVehicleNumber,
+        cabVehicleSeating,
+        cabVehicleFeatures,
+        cabAirportPricing,
+        cabCityTourPricing
+      });
+      await saveInDB(newFleetManagement);
+
+      res.status(c200).send({ ...fleet.created });
+    } else if (type === fleet.fleetManagementFetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllFleetManagement();
+      // console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...fleet.failed });
       } else {
         res.status(c200).send({
           status: yS,
