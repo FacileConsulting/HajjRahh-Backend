@@ -3,6 +3,7 @@ const User = require('./models/user');
 const CabsVendor = require('./models/cabsVendor');
 const HolidayBooking = require('./models/holidayBooking');
 const FleetManagement = require('./models/fleetManagement');
+const DriverManagement = require('./models/driverManagement');
 const PilgrimageBooking = require('./models/pilgrimageBooking');
 const HotelBooking = require('./models/hotelBooking');
 const PackageManagement = require('./models/packageManagement');
@@ -35,6 +36,10 @@ const getAllFleetManagement = async (query) => {
   return await FleetManagement.find(query);
 }
 
+const getAllDriverManagement = async (query) => {
+  return await DriverManagement.find(query);
+}
+
 const getAllPackageManagement = async (query) => {
   return await PackageManagement.find(query);
 } 
@@ -53,6 +58,10 @@ const getCabPromotion = async (query) => {
 
 const getFleetManagement = async (query) => {
   return await FleetManagement.findOne(query);
+}
+
+const getDriverManagement = async (query) => {
+  return await DriverManagement.findOne(query);
 }
 
 const getPackageManagement = async (query) => {
@@ -75,6 +84,10 @@ const deleteFleetManagement = async (query) => {
   return await FleetManagement.deleteOne({ _id: new ObjectId(query) });
 } 
 
+const deleteDriverManagement = async (query) => {
+  return await DriverManagement.deleteOne({ _id: new ObjectId(query) });
+}
+
 const deletePackageManagement = async (query) => {
   return await PackageManagement.deleteOne({ _id: new ObjectId(query) });
 } 
@@ -93,6 +106,10 @@ const updateCabPromotion = async (query, data) => {
 
 const updateFleetManagement = async (query, data) => {
   return await FleetManagement.updateOne({ _id: new ObjectId(query) }, { $set: data } );
+}
+
+const updateDriverManagement = async (query, data) => {
+  return await DriverManagement.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
 
 const updatePackageManagement = async (query, data) => {
@@ -123,6 +140,10 @@ const createFleetManagement = (query) => {
   return new FleetManagement(query);
 }
 
+const createDriverManagement = (query) => {
+  return new DriverManagement(query);
+}
+
 const createPackageManagement = (query) => {
   return new PackageManagement(query);
 }
@@ -138,6 +159,7 @@ module.exports = {
   getHotelBooking,
   getCabPromotion,
   getFleetManagement,
+  getDriverManagement,
   getPackageManagement,
   getAllPackages,
   getAllPilgrimageBooking,
@@ -145,15 +167,18 @@ module.exports = {
   getAllCabPromotion,
   getAllPackageManagement,
   getAllFleetManagement,
+  getAllDriverManagement,
   deletePilgrimageBooking,
   deleteHotelBooking,
   deleteCabPromotion,
   deleteFleetManagement,
+  deleteDriverManagement,
   deletePackageManagement,
   updatePilgrimageBooking,
   updateHotelBooking,
   updateCabPromotion,
   updateFleetManagement,
+  updateDriverManagement,
   updatePackageManagement,
   createHolidayBooking,
   createUser,
@@ -161,6 +186,7 @@ module.exports = {
   createHotelBooking,
   createCabPromotion,
   createFleetManagement,
+  createDriverManagement,
   createPackageManagement,
   saveInDB
 };

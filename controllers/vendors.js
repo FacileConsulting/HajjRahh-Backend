@@ -26,6 +26,11 @@ const {
   deleteFleetManagement,
   getFleetManagement,
   updateFleetManagement,
+  getAllDriverManagement,
+  createDriverManagement,
+  deleteDriverManagement,
+  getDriverManagement,
+  updateDriverManagement
 } = require('../mongo');
 
 const {
@@ -56,6 +61,7 @@ exports.vendors = async (req, res) => {
     packageManagement,
     cab,
     fleet,
+    driver,
     vendorsLogin
   } = constant();
   const axiosInstance = callAxiosInstance(otpURL);
@@ -123,6 +129,14 @@ exports.vendors = async (req, res) => {
       cabVehicleFeatures,
       cabAirportPricing,
       cabCityTourPricing,
+      driverManagementId,
+      cabDriverName,
+      cabMobileNumber,
+      cabLicense,
+      cabTagCar,
+      cabPayment,
+      cabRating,
+      cabJoinDate,
       mobile,
       otp
     } = req.body;
@@ -673,6 +687,71 @@ exports.vendors = async (req, res) => {
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...fleet.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === driver.driverManagementUpdate) {
+      // Update exist pilgrimage booking data
+      const result = await updateDriverManagement(driverManagementId, {      
+        cabDriverName,
+        cabMobileNumber,
+        cabLicense,
+        cabTagCar,
+        cabPayment,
+        cabRating,
+        cabJoinDate,
+      });
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...driver.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...driver.notUpdated });
+      } else {
+        return res.status(c200).send({ ...driver.notFound });
+      }
+    } else if (type === driver.driverManagementFetch) {
+      const result = await getDriverManagement({ _id: driverManagementId });
+
+      if (!result) {
+        return res.status(c200).send({ ...driver.noDriverManagement });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result || false
+        });
+      }
+    } else if (type === driver.driverManagementDelete) {
+      // Delete the document by ID
+      const result = await deleteDriverManagement(driverManagementId);
+      // console.log("$$$$$$$$$delte", result);
+      if (result.deletedCount === 1) {
+        return res.status(c200).send({ ...driver.deleted });
+      } else {
+        return res.status(c200).send({ ...driver.notFound });
+      }
+    } else if (type === driver.driverManagementCreate) {
+      // Create new pilgrimage booking data
+      const newDriverManagement = await createDriverManagement({
+        cabDriverName,
+        cabMobileNumber,
+        cabLicense,
+        cabTagCar,
+        cabPayment,
+        cabRating,
+        cabJoinDate
+      });
+      await saveInDB(newDriverManagement);
+
+      res.status(c200).send({ ...driver.created });
+    } else if (type === driver.driverManagementFetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllDriverManagement();
+      // console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...driver.failed });
       } else {
         res.status(c200).send({
           status: yS,

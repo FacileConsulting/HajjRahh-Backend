@@ -276,6 +276,56 @@ const constant = () => {
         status: nS
       }
     },
+    driver: {
+      driverManagementCreate: 'DRIVER_MANAGEMENT_CREATE',
+      driverManagementUpdate: 'DRIVER_MANAGEMENT_UPDATE',
+      driverManagementFetchAll: 'DRIVER_MANAGEMENT_FETCH_ALL',
+      driverManagementFetch: 'DRIVER_MANAGEMENT_FETCH',
+      driverManagementDelete: 'DRIVER_MANAGEMENT_DELETE',
+      deleted: {
+        message: 'Driver Management deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noDriverManagement: {
+        message: 'Driver Management does not exit. Contact Admin',
+        noDriverManagement: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Driver Management',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Driver Management updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Driver Management does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Driver Management created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /driverManagement method',
+        status: nS
+      }
+    },
     hotelBooking: {
       hotelBookingCreate: 'HOTEL_BOOKING_CREATE',
       hotelBookingUpdate: 'HOTEL_BOOKING_UPDATE',
