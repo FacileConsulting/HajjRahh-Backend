@@ -326,6 +326,60 @@ const constant = () => {
         status: nS
       }
     },
+    cabBooking: {
+      cabBookingCreate: 'CAB_BOOKING_CREATE',
+      cabBookingUpdateReview: 'CAB_BOOKING_UPDATE_REVIEW',
+      cabBookingFetchAll: 'CAB_BOOKING_FETCH_ALL',
+      cabBookingFetch: 'CAB_BOOKING_FETCH',
+      review: {
+        message: 'Review updated successfully',
+        review: true,
+        status: yS
+      },
+      deleted: {
+        message: 'Cab Booking deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noCabBooking: {
+        message: 'Cab Booking does not exit. Contact Admin',
+        noCabBooking: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Cab Booking',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Cab Booking updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Cab Booking does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Cab Booking created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /cabBooking method',
+        status: nS
+      }
+    },
     hotelBooking: {
       hotelBookingCreate: 'HOTEL_BOOKING_CREATE',
       hotelBookingUpdate: 'HOTEL_BOOKING_UPDATE',

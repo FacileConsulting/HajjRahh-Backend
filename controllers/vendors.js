@@ -28,9 +28,12 @@ const {
   updateFleetManagement,
   getAllDriverManagement,
   createDriverManagement,
+  createCabBooking,
   deleteDriverManagement,
   getDriverManagement,
-  updateDriverManagement
+  updateDriverManagement,
+  getAllCabBooking,
+  updateCabBookingReview
 } = require('../mongo');
 
 const {
@@ -62,6 +65,7 @@ exports.vendors = async (req, res) => {
     cab,
     fleet,
     driver,
+    cabBooking,
     vendorsLogin
   } = constant();
   const axiosInstance = callAxiosInstance(otpURL);
@@ -137,6 +141,18 @@ exports.vendors = async (req, res) => {
       cabPayment,
       cabRating,
       cabJoinDate,
+      cabBookingId,
+      cabBookVehicleName,
+      cabBookVehicleNumber,
+      cabBookPickupLocation,
+      cabBookPickupDate,
+      cabBookDropOffLocation,
+      cabBookDropOffDate,
+      cabBookRideStatus,
+      cabBookPaymentStatus,
+      cabBookStarRating,
+      cabBookReview,
+      cabBookReviewUpdate,
       mobile,
       otp
     } = req.body;
@@ -750,6 +766,31 @@ exports.vendors = async (req, res) => {
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       const result = await getAllDriverManagement();
       // console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...driver.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === cabBooking.cabBookingUpdateReview) {
+      // Update exist pilgrimage booking data
+      const result = await updateCabBookingReview(cabBookingId, {
+        cabBookReview: cabBookReviewUpdate
+      });
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...cabBooking.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...cabBooking.notUpdated });
+      } else {
+        return res.status(c200).send({ ...cabBooking.notFound });
+      }
+    } else if (type === cabBooking.cabBookingFetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllCabBooking();
+      console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...driver.failed });
       } else {

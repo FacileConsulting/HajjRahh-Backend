@@ -1,6 +1,7 @@
 const { ObjectId } = require('mongodb');
 const User = require('./models/user');
 const CabsVendor = require('./models/cabsVendor');
+const CabBooking = require('./models/cabBooking');
 const HolidayBooking = require('./models/holidayBooking');
 const FleetManagement = require('./models/fleetManagement');
 const DriverManagement = require('./models/driverManagement');
@@ -38,6 +39,10 @@ const getAllFleetManagement = async (query) => {
 
 const getAllDriverManagement = async (query) => {
   return await DriverManagement.find(query);
+}
+
+const getAllCabBooking = async (query) => {
+  return await CabBooking.find(query);
 }
 
 const getAllPackageManagement = async (query) => {
@@ -112,6 +117,10 @@ const updateDriverManagement = async (query, data) => {
   return await DriverManagement.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
 
+const updateCabBookingReview = async (query, data) => {
+  return await CabBooking.updateOne({ _id: new ObjectId(query) }, { $set: data } );
+}
+
 const updatePackageManagement = async (query, data) => {
   return await PackageManagement.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
@@ -144,6 +153,10 @@ const createDriverManagement = (query) => {
   return new DriverManagement(query);
 }
 
+const createCabBooking = (query) => {
+  return new CabBooking(query);
+}
+
 const createPackageManagement = (query) => {
   return new PackageManagement(query);
 }
@@ -168,6 +181,7 @@ module.exports = {
   getAllPackageManagement,
   getAllFleetManagement,
   getAllDriverManagement,
+  getAllCabBooking,
   deletePilgrimageBooking,
   deleteHotelBooking,
   deleteCabPromotion,
@@ -179,6 +193,7 @@ module.exports = {
   updateCabPromotion,
   updateFleetManagement,
   updateDriverManagement,
+  updateCabBookingReview,
   updatePackageManagement,
   createHolidayBooking,
   createUser,
@@ -187,6 +202,7 @@ module.exports = {
   createCabPromotion,
   createFleetManagement,
   createDriverManagement,
+  createCabBooking,
   createPackageManagement,
   saveInDB
 };
