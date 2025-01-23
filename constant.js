@@ -226,6 +226,56 @@ const constant = () => {
         status: nS
       }
     },
+    restaurant: {
+      create: 'RESTAURANT_PROMOTION_CREATE',
+      update: 'RESTAURANT_PROMOTION_UPDATE',
+      fetchAll: 'RESTAURANT_PROMOTION_FETCH_ALL',
+      fetch: 'RESTAURANT_PROMOTION_FETCH',
+      delete: 'RESTAURANT_PROMOTION_DELETE',
+      deleted: {
+        message: 'Restaurant Promotion deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noRestaurantPromotion: {
+        message: 'Restaurant Promotion does not exit. Contact Admin',
+        noRestaurantPromotion: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Restaurant Promotion',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Restaurant Promotion updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Restaurant Promotion does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Restaurant Promotion created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /restaurantPromotion method',
+        status: nS
+      }
+    },
     fleet: {
       fleetManagementCreate: 'FLEET_MANAGEMENT_CREATE',
       fleetManagementUpdate: 'FLEET_MANAGEMENT_UPDATE',
