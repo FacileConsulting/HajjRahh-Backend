@@ -8,6 +8,7 @@ const DriverManagement = require('./models/driverManagement');
 const PilgrimageBooking = require('./models/pilgrimageBooking');
 const HotelBooking = require('./models/hotelBooking');
 const PackageManagement = require('./models/packageManagement');
+const RestaurantMenu = require('./models/restaurantMenu');
 
 const getUser = async (query) => {
   return await User.findOne(query);
@@ -31,6 +32,10 @@ const getAllHotelBooking = async (query, inOut) => {
 
 const getAllCabPromotion = async (query) => {
   return await CabsVendor.find(query);
+}
+
+const getAllRestaurantMenu = async (query) => {
+  return await RestaurantMenu.find(query);
 }
 
 const getAllFleetManagement = async (query) => {
@@ -59,6 +64,10 @@ const getHotelBooking = async (query) => {
 
 const getCabPromotion = async (query) => {
   return await CabsVendor.findOne(query);
+} 
+
+const getRestaurantMenu = async (query) => {
+  return await RestaurantMenu.findOne(query);
 }  
 
 const getFleetManagement = async (query) => {
@@ -85,6 +94,10 @@ const deleteCabPromotion = async (query) => {
   return await CabsVendor.deleteOne({ _id: new ObjectId(query) });
 } 
 
+const deleteRestaurantMenu = async (query) => {
+  return await RestaurantMenu.deleteOne({ _id: new ObjectId(query) });
+} 
+
 const deleteFleetManagement = async (query) => {
   return await FleetManagement.deleteOne({ _id: new ObjectId(query) });
 } 
@@ -107,6 +120,10 @@ const updateHotelBooking = async (query, data) => {
 
 const updateCabPromotion = async (query, data) => {
   return await CabsVendor.updateOne({ _id: new ObjectId(query) }, { $set: data } );
+}
+
+const updateRestaurantMenu = async (query, data) => {
+  return await RestaurantMenu.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
 
 const updateFleetManagement = async (query, data) => {
@@ -143,6 +160,10 @@ const createHotelBooking = (query) => {
 
 const createCabPromotion = (query) => {
   return new CabsVendor(query);
+}
+
+const createRestaurantMenu = (query) => {
+  return new RestaurantMenu(query);
 }
 
 const createFleetManagement = (query) => {
@@ -204,5 +225,10 @@ module.exports = {
   createDriverManagement,
   createCabBooking,
   createPackageManagement,
+  createRestaurantMenu,
+  deleteRestaurantMenu,
+  updateRestaurantMenu,
+  getAllRestaurantMenu,
+  getRestaurantMenu,
   saveInDB
 };

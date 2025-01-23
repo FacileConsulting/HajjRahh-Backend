@@ -28,12 +28,16 @@ const {
   updateFleetManagement,
   getAllDriverManagement,
   createDriverManagement,
-  createCabBooking,
   deleteDriverManagement,
   getDriverManagement,
   updateDriverManagement,
   getAllCabBooking,
-  updateCabBookingReview
+  updateCabBookingReview,
+  getRestaurantMenu,
+  updateRestaurantMenu,
+  createRestaurantMenu,
+  getAllRestaurantMenu,
+  deleteRestaurantMenu
 } = require('../mongo');
 
 const {
@@ -66,6 +70,7 @@ exports.vendors = async (req, res) => {
     fleet,
     driver,
     cabBooking,
+    restaurantMenu,
     vendorsLogin
   } = constant();
   const axiosInstance = callAxiosInstance(otpURL);
@@ -142,16 +147,13 @@ exports.vendors = async (req, res) => {
       cabRating,
       cabJoinDate,
       cabBookingId,
-      cabBookVehicleName,
-      cabBookVehicleNumber,
-      cabBookPickupLocation,
-      cabBookPickupDate,
-      cabBookDropOffLocation,
-      cabBookDropOffDate,
-      cabBookRideStatus,
-      cabBookPaymentStatus,
-      cabBookStarRating,
-      cabBookReview,
+      restaurantMenuId,
+      restaurantItemName,
+      restaurantMenuType,
+      restaurantMenuPhoto,
+      restaurantMenuHalalCertification,
+      restaurantMenuDescription,
+      restaurantMenuAvailability,
       cabBookReviewUpdate,
       mobile,
       otp
@@ -768,6 +770,69 @@ exports.vendors = async (req, res) => {
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...driver.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === restaurantMenu.update) {
+      // Update exist pilgrimage booking data
+      const result = await updateRestaurantMenu(restaurantMenuId, {      
+        restaurantItemName,
+        restaurantMenuType,
+        restaurantMenuPhoto,
+        restaurantMenuHalalCertification,
+        restaurantMenuDescription,
+        restaurantMenuAvailability
+      });
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...restaurantMenu.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...restaurantMenu.notUpdated });
+      } else {
+        return res.status(c200).send({ ...restaurantMenu.notFound });
+      }
+    } else if (type === restaurantMenu.fetch) {
+      const result = await getRestaurantMenu({ _id: restaurantMenuId });
+
+      if (!result) {
+        return res.status(c200).send({ ...cab.noRestaurantMenu });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result || false
+        });
+      }
+    } else if (type === restaurantMenu.delete) {
+      // Delete the document by ID
+      const result = await deleteRestaurantMenu(restaurantMenuId);
+      // console.log("$$$$$$$$$delte", result);
+      if (result.deletedCount === 1) {
+        return res.status(c200).send({ ...restaurantMenu.deleted });
+      } else {
+        return res.status(c200).send({ ...restaurantMenu.notFound });
+      }
+    } else if (type === restaurantMenu.create) {
+      // Create new pilgrimage booking data
+      const newRestaurantMenu = await createRestaurantMenu({
+        restaurantItemName,
+        restaurantMenuType,
+        restaurantMenuPhoto,
+        restaurantMenuHalalCertification,
+        restaurantMenuDescription,
+        restaurantMenuAvailability
+      });
+      await saveInDB(newRestaurantMenu);
+
+      res.status(c200).send({ ...restaurantMenu.created });
+    } else if (type === restaurantMenu.fetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllRestaurantMenu();
+      // console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...restaurantMenu.failed });
       } else {
         res.status(c200).send({
           status: yS,

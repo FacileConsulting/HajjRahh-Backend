@@ -379,6 +379,56 @@ const constant = () => {
         message: 'Error in /cabBooking method',
         status: nS
       }
+    },    
+    restaurantMenu: {
+      create: 'RESTAURANT_MENU_CREATE',
+      update: 'RESTAURANT_MENU_UPDATE',
+      fetchAll: 'RESTAURANT_MENU_FETCH_ALL',
+      fetch: 'RESTAURANT_MENU_FETCH',
+      delete: 'RESTAURANT_MENU_DELETE',
+      deleted: {
+        message: 'Restaurant Menu deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noRestaurantMenu: {
+        message: 'Restaurant Menu does not exit. Contact Admin',
+        noRestaurantMenu: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Restaurant Menu',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Restaurant Menu updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Restaurant Menu does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Restaurant Menu created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /restaurantMenu method',
+        status: nS
+      }
     },
     hotelBooking: {
       hotelBookingCreate: 'HOTEL_BOOKING_CREATE',
