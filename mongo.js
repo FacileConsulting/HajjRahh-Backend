@@ -3,6 +3,7 @@ const User = require('./models/user');
 const CabsVendor = require('./models/cabsVendor');
 const RestaurantPromotion = require('./models/restaurantPromotion');
 const CabBooking = require('./models/cabBooking');
+const RestaurantPayment = require('./models/restaurantPayment');
 const HolidayBooking = require('./models/holidayBooking');
 const FleetManagement = require('./models/fleetManagement');
 const DriverManagement = require('./models/driverManagement');
@@ -53,6 +54,10 @@ const getAllDriverManagement = async (query) => {
 
 const getAllCabBooking = async (query) => {
   return await CabBooking.find(query);
+}
+
+const getAllRestaurantPayment = async (query) => {
+  return await RestaurantPayment.find(query);
 }
 
 const getAllPackageManagement = async (query) => {
@@ -256,5 +261,6 @@ module.exports = {
   updateRestaurantMenu,
   getAllRestaurantMenu,
   getRestaurantMenu,
+  getAllRestaurantPayment,
   saveInDB
 };

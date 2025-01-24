@@ -479,6 +479,22 @@ const constant = () => {
         message: 'Error in /restaurantMenu method',
         status: nS
       }
+    },    
+    restaurantPayment: {
+      fetchAll: 'RESTAURANT_PAYMENT_FETCH_ALL',
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /restaurantPayment method',
+        status: nS
+      }
     },
     hotelBooking: {
       hotelBookingCreate: 'HOTEL_BOOKING_CREATE',

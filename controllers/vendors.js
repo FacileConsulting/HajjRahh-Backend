@@ -6,12 +6,10 @@ const {
   createRestaurantPromotion,
   createPackageManagement,
   getPilgrimageBooking,
-  getHotelBooking,
   getCabPromotion,
   getRestaurantPromotion,
   getPackageManagement,
   getAllPilgrimageBooking,
-  getAllHotelBooking,
   getAllCabPromotion,
   getAllRestaurantPromotion,
   getAllPackageManagement,
@@ -37,6 +35,7 @@ const {
   getDriverManagement,
   updateDriverManagement,
   getAllCabBooking,
+  getAllRestaurantPayment,
   updateCabBookingReview,
   getRestaurantMenu,
   updateRestaurantMenu,
@@ -75,6 +74,7 @@ exports.vendors = async (req, res) => {
     fleet,
     driver,
     cabBooking,
+    restaurantPayment,
     restaurantMenu,
     restaurant,
     vendorsLogin
@@ -927,7 +927,19 @@ exports.vendors = async (req, res) => {
       const result = await getAllCabBooking();
       console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
-        res.status(c200).send({ ...driver.failed });
+        res.status(c200).send({ ...cabBooking.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === restaurantPayment.fetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllRestaurantPayment();
+      console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...restaurantPayment.failed });
       } else {
         res.status(c200).send({
           status: yS,
