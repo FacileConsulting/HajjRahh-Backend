@@ -60,13 +60,13 @@ const amadeusConfig = (obj) => {
 
 const otpConfig = (obj) => {
   const data = qs.stringify({
-    userid: 'solankiz',
-    password: 'Kanv@4589',
+    userid: 'manishbill',
+    password: 'Facile@123',
     mobile: obj.mobile,
-    senderid: 'SMSGAT',
+    senderid: 'FACILE',
     sendMethod: 'generate',
     msgType: 'text',
-    msg: 'Your SMSGatewayCenter OTP code is $otp$. Please use the code within 2 minutes. - Demo Message.',
+    msg: 'OTP Verification Code for Login is : $otp$. Regards, Facile Consulting Pvt.Ltd.',
     codeExpiry: '300',
     codeLength: '6',
     codeType: 'num',
@@ -88,8 +88,8 @@ const otpConfig = (obj) => {
 
 const otpVerifyConfig = (obj) => {
   const data = qs.stringify({
-    userid: 'solankiz',
-    password: 'Kanv@4589',
+    userid: 'manishbill',
+    password: 'Facile@123',
     mobile: obj.mobile,
     otp: obj.otp,
     sendMethod: 'verify',
