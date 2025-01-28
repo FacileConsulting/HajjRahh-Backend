@@ -2,6 +2,7 @@ const { ObjectId } = require('mongodb');
 const User = require('./models/user');
 const CabsVendor = require('./models/cabsVendor');
 const RestaurantPromotion = require('./models/restaurantPromotion');
+const RestaurantSeating = require('./models/restaurantSeating');
 const CabBooking = require('./models/cabBooking');
 const RestaurantPayment = require('./models/restaurantPayment');
 const HolidayBooking = require('./models/holidayBooking');
@@ -38,6 +39,10 @@ const getAllCabPromotion = async (query) => {
 
 const getAllRestaurantPromotion = async (query) => {
   return await RestaurantPromotion.find(query);
+}
+
+const getAllRestaurantSeating = async (query) => {
+  return await RestaurantSeating.find(query);
 }
 
 const getAllRestaurantMenu = async (query) => {
@@ -78,6 +83,10 @@ const getCabPromotion = async (query) => {
 
 const getRestaurantPromotion = async (query) => {
   return await RestaurantPromotion.findOne(query);
+}
+
+const getRestaurantSeating = async (query) => {
+  return await RestaurantSeating.findOne(query);
 } 
 
 const getRestaurantMenu = async (query) => {
@@ -110,6 +119,10 @@ const deleteCabPromotion = async (query) => {
 
 const deleteRestaurantPromotion = async (query) => {
   return await RestaurantPromotion.deleteOne({ _id: new ObjectId(query) });
+}
+
+const deleteRestaurantSeating = async (query) => {
+  return await RestaurantSeating.deleteOne({ _id: new ObjectId(query) });
 } 
 
 const deleteRestaurantMenu = async (query) => {
@@ -142,6 +155,10 @@ const updateCabPromotion = async (query, data) => {
 
 const updateRestaurantPromotion = async (query, data) => {
   return await RestaurantPromotion.updateOne({ _id: new ObjectId(query) }, { $set: data } );
+}
+
+const updateRestaurantSeating = async (query, data) => {
+  return await RestaurantSeating.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
 
 const updateRestaurantMenu = async (query, data) => {
@@ -188,6 +205,10 @@ const createRestaurantPromotion = (query) => {
   return new RestaurantPromotion(query);
 }
 
+const createRestaurantSeating = (query) => {
+  return new RestaurantSeating(query);
+}
+
 const createRestaurantMenu = (query) => {
   return new RestaurantMenu(query);
 }
@@ -219,6 +240,7 @@ module.exports = {
   getHotelBooking,
   getCabPromotion,
   getRestaurantPromotion,
+  getRestaurantSeating,
   getFleetManagement,
   getDriverManagement,
   getPackageManagement,
@@ -227,6 +249,7 @@ module.exports = {
   getAllHotelBooking,
   getAllCabPromotion,
   getAllRestaurantPromotion,
+  getAllRestaurantSeating,
   getAllPackageManagement,
   getAllFleetManagement,
   getAllDriverManagement,
@@ -235,6 +258,7 @@ module.exports = {
   deleteHotelBooking,
   deleteCabPromotion,
   deleteRestaurantPromotion,
+  deleteRestaurantSeating,
   deleteFleetManagement,
   deleteDriverManagement,
   deletePackageManagement,
@@ -242,6 +266,7 @@ module.exports = {
   updateHotelBooking,
   updateCabPromotion,
   updateRestaurantPromotion,
+  updateRestaurantSeating,
   updateFleetManagement,
   updateDriverManagement,
   updateCabBookingReview,
@@ -252,6 +277,7 @@ module.exports = {
   createHotelBooking,
   createCabPromotion,
   createRestaurantPromotion,
+  createRestaurantSeating,
   createFleetManagement,
   createDriverManagement,
   createCabBooking,

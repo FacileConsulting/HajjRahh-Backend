@@ -479,6 +479,56 @@ const constant = () => {
         message: 'Error in /restaurantMenu method',
         status: nS
       }
+    },   
+    restaurantSeating: {
+      create: 'RESTAURANT_SEATING_CREATE',
+      update: 'RESTAURANT_SEATING_UPDATE',
+      fetchAll: 'RESTAURANT_SEATING_FETCH_ALL',
+      fetch: 'RESTAURANT_SEATING_FETCH',
+      delete: 'RESTAURANT_SEATING_DELETE',
+      deleted: {
+        message: 'Restaurant Seating deleted successfully',
+        deleted: true,
+        status: yS
+      },
+      noRestaurantSeating: {
+        message: 'Restaurant Seating does not exit. Contact Admin',
+        noRestaurantSeating: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Restaurant Seating',
+        notUpdated: true,
+        status: yS
+      },
+      updated: {
+        message: 'Restaurant Seating updated successfully',
+        updated: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Restaurant Seating does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Restaurant Seating created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /restaurantSeating method',
+        status: nS
+      }
     },    
     restaurantPayment: {
       fetchAll: 'RESTAURANT_PAYMENT_FETCH_ALL',

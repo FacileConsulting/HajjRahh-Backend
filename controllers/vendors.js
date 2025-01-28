@@ -41,7 +41,12 @@ const {
   updateRestaurantMenu,
   createRestaurantMenu,
   getAllRestaurantMenu,
-  deleteRestaurantMenu
+  deleteRestaurantMenu,
+  getRestaurantSeating,
+  updateRestaurantSeating,
+  createRestaurantSeating,
+  getAllRestaurantSeating,
+  deleteRestaurantSeating,
 } = require('../mongo');
 
 const {
@@ -75,6 +80,7 @@ exports.vendors = async (req, res) => {
     driver,
     cabBooking,
     restaurantPayment,
+    restaurantSeating,
     restaurantMenu,
     restaurant,
     vendorsLogin
@@ -165,6 +171,12 @@ exports.vendors = async (req, res) => {
       restaurantPromoType,
       restaurantAssignTo,
       restaurantPromoEngine,
+      restaurantSeatingId,
+      restaurantSeatingCustomer,
+      restaurantSeatingMobile,
+      restaurantSeatingDateTime,
+      restaurantSeatingGuests,
+      restaurantSeatingTable,
       cabBookReviewUpdate,
       mobile,
       otp
@@ -903,6 +915,67 @@ exports.vendors = async (req, res) => {
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurant.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === restaurantSeating.update) {
+      // Update exist pilgrimage booking data
+      const result = await updateRestaurantSeating(restaurantSeatingId, {      
+        restaurantSeatingCustomer,
+        restaurantSeatingMobile,
+        restaurantSeatingDateTime,
+        restaurantSeatingGuests,
+        restaurantSeatingTable
+      });
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...restaurantSeating.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...restaurantSeating.notUpdated });
+      } else {
+        return res.status(c200).send({ ...restaurantSeating.notFound });
+      }
+    } else if (type === restaurantSeating.fetch) {
+      const result = await getRestaurantSeating({ _id: restaurantSeatingId });
+
+      if (!result) {
+        return res.status(c200).send({ ...restaurantSeating.noRestaurantSeating });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result || false
+        });
+      }
+    } else if (type === restaurantSeating.delete) {
+      // Delete the document by ID
+      const result = await deleteRestaurantSeating(restaurantSeatingId);
+      // console.log("$$$$$$$$$delte", result);
+      if (result.deletedCount === 1) {
+        return res.status(c200).send({ ...restaurantSeating.deleted });
+      } else {
+        return res.status(c200).send({ ...restaurantSeating.notFound });
+      }
+    } else if (type === restaurantSeating.create) {
+      // Create new pilgrimage booking data
+      const newRestaurantSeating = await createRestaurantSeating({   
+        restaurantSeatingCustomer,
+        restaurantSeatingMobile,
+        restaurantSeatingDateTime,
+        restaurantSeatingGuests,
+        restaurantSeatingTable
+      });
+      await saveInDB(newRestaurantSeating);
+
+      res.status(c200).send({ ...restaurantSeating.created });
+    } else if (type === restaurantSeating.fetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllRestaurantSeating();
+      // console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...restaurantSeating.failed });
       } else {
         res.status(c200).send({
           status: yS,
