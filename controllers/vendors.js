@@ -35,8 +35,10 @@ const {
   getDriverManagement,
   updateDriverManagement,
   getAllCabBooking,
+  getAllRestaurantFeedback,
   getAllRestaurantPayment,
   updateCabBookingReview,
+  updateRestaurantFeedbackReview,
   getRestaurantMenu,
   updateRestaurantMenu,
   createRestaurantMenu,
@@ -79,6 +81,7 @@ exports.vendors = async (req, res) => {
     fleet,
     driver,
     cabBooking,
+    restaurantFeedback,
     restaurantPayment,
     restaurantSeating,
     restaurantMenu,
@@ -178,6 +181,8 @@ exports.vendors = async (req, res) => {
       restaurantSeatingGuests,
       restaurantSeatingTable,
       cabBookReviewUpdate,
+      restaurantFeedbackId,
+      restaurantFeedbackReviewUpdate,
       mobile,
       otp
     } = req.body;
@@ -1001,6 +1006,33 @@ exports.vendors = async (req, res) => {
       console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...cabBooking.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === restaurantFeedback.updateReview) {
+      // Update exist pilgrimage booking data
+      const result = await updateRestaurantFeedbackReview(restaurantFeedbackId, {
+        restaurantFeedbackReview: restaurantFeedbackReviewUpdate
+      });     
+
+
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...restaurantFeedback.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...restaurantFeedback.notUpdated });
+      } else {
+        return res.status(c200).send({ ...restaurantFeedback.notFound });
+      }
+    } else if (type === restaurantFeedback.fetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllRestaurantFeedback();
+      console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...restaurantFeedback.failed });
       } else {
         res.status(c200).send({
           status: yS,

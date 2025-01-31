@@ -4,6 +4,7 @@ const CabsVendor = require('./models/cabsVendor');
 const RestaurantPromotion = require('./models/restaurantPromotion');
 const RestaurantSeating = require('./models/restaurantSeating');
 const CabBooking = require('./models/cabBooking');
+const RestaurantFeedback = require('./models/restaurantFeedback');
 const RestaurantPayment = require('./models/restaurantPayment');
 const HolidayBooking = require('./models/holidayBooking');
 const FleetManagement = require('./models/fleetManagement');
@@ -59,6 +60,10 @@ const getAllDriverManagement = async (query) => {
 
 const getAllCabBooking = async (query) => {
   return await CabBooking.find(query);
+}
+
+const getAllRestaurantFeedback = async (query) => {
+  return await RestaurantFeedback.find(query);
 }
 
 const getAllRestaurantPayment = async (query) => {
@@ -177,6 +182,10 @@ const updateCabBookingReview = async (query, data) => {
   return await CabBooking.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
 
+const updateRestaurantFeedbackReview = async (query, data) => {
+  return await RestaurantFeedback.updateOne({ _id: new ObjectId(query) }, { $set: data } );
+}
+
 const updatePackageManagement = async (query, data) => {
   return await PackageManagement.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
@@ -219,10 +228,6 @@ const createFleetManagement = (query) => {
 
 const createDriverManagement = (query) => {
   return new DriverManagement(query);
-}
-
-const createCabBooking = (query) => {
-  return new CabBooking(query);
 }
 
 const createPackageManagement = (query) => {
@@ -280,7 +285,6 @@ module.exports = {
   createRestaurantSeating,
   createFleetManagement,
   createDriverManagement,
-  createCabBooking,
   createPackageManagement,
   createRestaurantMenu,
   deleteRestaurantMenu,
@@ -288,5 +292,7 @@ module.exports = {
   getAllRestaurantMenu,
   getRestaurantMenu,
   getAllRestaurantPayment,
+  getAllRestaurantFeedback,
+  updateRestaurantFeedbackReview,
   saveInDB
 };
