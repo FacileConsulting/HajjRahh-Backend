@@ -547,7 +547,6 @@ const constant = () => {
       }
     },
     restaurantFeedback: {
-      create: 'RESTAURANT_FEEDBACK_CREATE',
       fetchAll: 'RESTAURANT_FEEDBACK_FETCH_ALL',
       fetch: 'RESTAURANT_FEEDBACK_FETCH',
       updateReview: 'RESTAURANT_FEEDBACK_UPDATE_REVIEW',
