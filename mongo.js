@@ -13,6 +13,7 @@ const PilgrimageBooking = require('./models/pilgrimageBooking');
 const HotelBooking = require('./models/hotelBooking');
 const PackageManagement = require('./models/packageManagement');
 const RestaurantMenu = require('./models/restaurantMenu');
+const RestaurantOrdering = require('./models/restaurantOrdering');
 
 const getUser = async (query) => {
   return await User.findOne(query);
@@ -48,6 +49,10 @@ const getAllRestaurantSeating = async (query) => {
 
 const getAllRestaurantMenu = async (query) => {
   return await RestaurantMenu.find(query);
+}
+
+const getAllRestaurantOrdering = async (query) => {
+  return await RestaurantOrdering.find(query);
 }
 
 const getAllFleetManagement = async (query) => {
@@ -108,7 +113,7 @@ const getDriverManagement = async (query) => {
 
 const getPackageManagement = async (query) => {
   return await PackageManagement.findOne(query);
-} 
+}
 
 const deletePilgrimageBooking = async (query) => {
   return await PilgrimageBooking.deleteOne({ _id: new ObjectId(query) });
@@ -168,6 +173,10 @@ const updateRestaurantSeating = async (query, data) => {
 
 const updateRestaurantMenu = async (query, data) => {
   return await RestaurantMenu.updateOne({ _id: new ObjectId(query) }, { $set: data } );
+}
+
+const updateRestaurantOrdering = async (query, data) => {
+  return await RestaurantOrdering.updateOne({ _id: new ObjectId(query) }, { $set: data } );
 }
 
 const updateFleetManagement = async (query, data) => {
@@ -294,5 +303,7 @@ module.exports = {
   getAllRestaurantPayment,
   getAllRestaurantFeedback,
   updateRestaurantFeedbackReview,
+  getAllRestaurantOrdering,
+  updateRestaurantOrdering,
   saveInDB
 };

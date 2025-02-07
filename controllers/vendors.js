@@ -49,6 +49,8 @@ const {
   createRestaurantSeating,
   getAllRestaurantSeating,
   deleteRestaurantSeating,
+  getAllRestaurantOrdering,
+  updateRestaurantOrdering,
 } = require('../mongo');
 
 const {
@@ -85,6 +87,7 @@ exports.vendors = async (req, res) => {
     restaurantPayment,
     restaurantSeating,
     restaurantMenu,
+    restaurantOrdering,
     restaurant,
     vendorsLogin
   } = constant();
@@ -183,6 +186,9 @@ exports.vendors = async (req, res) => {
       cabBookReviewUpdate,
       restaurantFeedbackId,
       restaurantFeedbackReviewUpdate,
+      restaurantOrderingId,
+      restaurantOrderingAct,
+      restaurantOrderingOrderStatus,
       mobile,
       otp
     } = req.body;
@@ -1033,6 +1039,34 @@ exports.vendors = async (req, res) => {
       console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurantFeedback.failed });
+      } else {
+        res.status(c200).send({
+          status: yS,
+          data: result
+        });
+      }
+    } else if (type === restaurantOrdering.update) {
+      // Update exist pilgrimage booking data
+      const result = await updateRestaurantOrdering(restaurantOrderingId, {
+        restaurantOrderingOrderStatus,
+        restaurantOrderingAct
+      });     
+
+
+      console.log('!!!!!!!!!!!@@!@!@ result', result);
+      if (result.nModified) {
+        return res.status(c200).send({ ...restaurantOrdering.updated });
+      } else if (result.nModified === 0) {
+        return res.status(c200).send({ ...restaurantFeedback.notUpdated });
+      } else {
+        return res.status(c200).send({ ...restaurantFeedback.notFound });
+      }
+    } else if (type === restaurantOrdering.fetchAll) {
+      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      const result = await getAllRestaurantOrdering();
+      console.log('###############3333333333333***********', result);
+      if (!result || result.length == 0) {
+        res.status(c200).send({ ...restaurantOrdering.failed });
       } else {
         res.status(c200).send({
           status: yS,

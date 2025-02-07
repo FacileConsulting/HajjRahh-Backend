@@ -598,7 +598,55 @@ const constant = () => {
         message: 'Error in /restaurantFeedback method',
         status: nS
       }
-    },  
+    },
+    restaurantOrdering: {
+      fetchAll: 'RESTAURANT_ORDERING_FETCH_ALL',
+      fetch: 'RESTAURANT_ORDERING_FETCH',
+      update: 'RESTAURANT_ORDERING_UPDATE',
+      acceptMsg: {
+        message: 'Order accepted successfully',
+        acceptMsg: true,
+        status: yS
+      },
+      updated: {
+        message: 'Restaurant Order updated successfully',
+        updated: true,
+        status: yS
+      },
+      notUpdated: {
+        message: 'No Modification in Restaurant Order',
+        notUpdated: true,
+        status: yS
+      },
+      declineMsg: {
+        message: 'Order declined successfully',
+        declineMsg: true,
+        status: yS
+      },
+      notFound: {
+        message: 'Restaurant Ordering does not found',
+        notFound: true,
+        status: yS
+      },
+      failed: {
+        message: 'Something went wrong. Please check with admin',
+        data: [],
+        status: yS
+      },
+      created: {
+        message: 'Restaurant Ordering created successfully',
+        created: true,
+        status: yS
+      },
+      errorType: {
+        message: 'Error in /vendors API ',
+        status: nS
+      },
+      error: {
+        message: 'Error in /restaurantOrdering method',
+        status: nS
+      }
+    }, 
     hotelBooking: {
       hotelBookingCreate: 'HOTEL_BOOKING_CREATE',
       hotelBookingUpdate: 'HOTEL_BOOKING_UPDATE',
