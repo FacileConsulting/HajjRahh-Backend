@@ -20,8 +20,8 @@ const refreshAmadeusToken = async (failedRequest) => {
       },
       data: new URLSearchParams({
         grant_type: 'client_credentials',
-        client_id: process.env.AMADEUS_TEST_API_KEY || 'ovayUMauSjs5nJkUfhwtTZG0vmiUWpf5',
-        client_secret: process.env.AMADEUS_TEST_API_SECRET || 'g4XpEfumxEhEYYAl'
+        client_id: process.env.AMADEUS_TEST_API_KEY || 's6mATMSG5zAb4kmTFhCQJJNy8nLO54sd',
+        client_secret: process.env.AMADEUS_TEST_API_SECRET || 'uB5RGrnPzyWXYcgj'
       })
     };
     const response = await axiosInstance.request(config);
