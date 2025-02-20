@@ -27,7 +27,7 @@ exports.trips = async (req, res) => {
       for (let i = 0; i < data.length; i++) {
         trips.push({
           packageName: data[i].packageName,
-          image: data[i].image,
+          tripImage: data[i].tripImage,
           status: getTripStatus(data[i]._id.toString()),
           dateRange: data[i].dateRange,
         });
@@ -45,6 +45,7 @@ exports.trips = async (req, res) => {
         const getPackgeIds = user.trips.map((trip) => trip.packageId);
         const query = { _id: { $in: getPackgeIds } };
         let packages = await getPackages(query);
+        console.log('user.trips', packages);
         if (!packages || packages.length == 0) { 
           res.status(c200).send({ ...trips.failed });
         } else {

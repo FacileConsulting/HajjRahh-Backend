@@ -4,7 +4,6 @@ const Cabs = require('../models/cabs');
 exports.searchCabs = async (req, res) => {
   try {
     console.log('searchCabs', req.body);
-
     const { cabPickUpPlace, cabDropPlace, cabDate, cabTime, cabPassengers3, cabPassengers4, cabPassengers5, cabPassengers6, cabPriceLt40, cabPriceLt60, cabPriceLt80, cabPriceLt100, cabVehicleHatchback, cabVehicleSedan, cabVehicleSUV, cabVehicleMUV, cabVehicleCompactSUV, cabModelWagonR, cabModelIndica, cabModelDzire, cabModelEtios, cabModelXcent } = req.body;
 
 

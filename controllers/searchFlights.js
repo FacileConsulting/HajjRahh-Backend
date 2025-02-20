@@ -7,7 +7,7 @@ const { amadeusConfig } = require('../utils');
 
 exports.searchFlights = async (req, res) => {
   try {
-    const { fromHoliday = false, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, flightType = true, adults = 1, children = 1, infants = 1, travelClass = 'ECONOMY', emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;    
+    const { fromHoliday = false, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate, flightType = true, adults = 1, children = 0, infants = 0, travelClass = 'ECONOMY', emirates, lufthansa, qatarAiraways, etihadAiraways, egyptair, twoFourHour, fourSixHour, zeroStop, oneStop, aboveOneStop, egg, nonVeg, morning, afternoon, evening, night } = req.body;    
     console.log('#@#@@@@@@@@@', adults, fromHoliday, flyingFrom, flyingTo, flightDepartureDate, flightReturnDate);
     
     const getAirlinesArray = () => {
@@ -203,8 +203,9 @@ exports.searchFlights = async (req, res) => {
 
     const callingforSearchFlight = async() => {
       await refreshAmadeusToken();
+      // console.log('############$#$#$#', config);
       const response = await axiosInstance.request(config);
-      // console.log('##@#response', Object.keys(response.data));
+      console.log('##@#response', Object.keys(response.data));
       // const datum = response.data;
       let datum;
       if (fromHoliday) {

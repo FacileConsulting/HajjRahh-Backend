@@ -121,6 +121,10 @@ const PackageManagementSchema = new mongoose.Schema({
     type: Array,
     required: false
   },
+  tripImage: {
+    type: String,
+    required: false
+  }
 });
 
 module.exports = mongoose.model('PackageManagement', PackageManagementSchema);

@@ -5,7 +5,7 @@ const tripsSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  image: {
+  tripImage: {
     type: String,
     required: true
   },
