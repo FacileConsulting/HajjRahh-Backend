@@ -10,17 +10,23 @@ const HolidayBooking = require('./models/holidayBooking');
 const FleetManagement = require('./models/fleetManagement');
 const DriverManagement = require('./models/driverManagement');
 const PilgrimageBooking = require('./models/pilgrimageBooking');
-const HotelBooking = require('./models/hotelBooking');
+const HotelBookingMain = require('./models/hotelBookingMain');
+const Hotels = require('./models/hotels');
 const PackageManagement = require('./models/packageManagement');
+const HotelBooking = require('./models/hotelBooking');
 const RestaurantMenu = require('./models/restaurantMenu');
 const RestaurantOrdering = require('./models/restaurantOrdering');
 
 const getUser = async (query) => {
   return await User.findOne(query);
-}
+} 
 
 const getPackages = async (query) => {
   return await PackageManagement.findOne(query);
+}
+
+const getHotels = async (query) => {
+  return await Hotels.findOne(query);
 }
 
 const getAllPackages = async (query) => {
@@ -203,6 +209,10 @@ const createHolidayBooking = (query) => {
   return new HolidayBooking(query);
 }
 
+const createHolidayBookingMain = (query) => {
+  return new HotelBookingMain(query);
+}
+
 const createUser = (query) => {
   return new User(query);
 }
@@ -251,6 +261,7 @@ module.exports = {
   getUser,
   getPackages,
   getPilgrimageBooking,
+  getHotels,
   getHotelBooking,
   getCabPromotion,
   getRestaurantPromotion,
@@ -286,6 +297,7 @@ module.exports = {
   updateCabBookingReview,
   updatePackageManagement,
   createHolidayBooking,
+  createHolidayBookingMain,
   createUser,
   createPilgrimageBooking,
   createHotelBooking,

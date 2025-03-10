@@ -96,6 +96,17 @@ const constant = () => {
       }
 
     },
+    hotelBookingMain: {
+      noHotel: {
+        message: 'Hotel did not exist',
+        invalidHotel: true,
+        status: yS
+      },
+      error: {
+        message: 'Error in /holidayBooking',
+        status: nS
+      }
+    },
     holidayBooking: {
       noPackage: {
         message: 'Holiday Package did not exist',
