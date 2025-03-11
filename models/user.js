@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  isGoogle: {
+    type: Boolean,
+    required: false
+  },
   email: {
     type: String,
     required: true,
@@ -13,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: true
+    required: false
   },
   address: {
     type: String,

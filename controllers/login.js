@@ -8,10 +8,10 @@ const {
 exports.checkLoginUser = async (req, res) => {
   const { c200, c500, login } = constant();
   try {
-    const { email, password } = req.body;
+    const { email, password, isGoogle = false } = req.body;
     const user = await getUser({ email });
     // console.log('QQQQQQQQQQQ##   tokenuser', user);
-    if (user && !(await user.comparePassword(password))) {
+    if (user && !isGoogle && !(await user.comparePassword(password))) {
       return res.status(c200).send({ ...login.invalid });
     }
     if (!user) {
