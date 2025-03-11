@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const hotelsSchema = new mongoose.Schema({
+  comments: {
+    type: Array,
+    required: false
+  },
   namePlace: {
     type: String,
     required: true
