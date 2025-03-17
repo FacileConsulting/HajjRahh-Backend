@@ -7,14 +7,14 @@ const generateRandom10DigitNumber = () => {
 }
 
 const getToken = (query) => {
-  return jwt.sign(query, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
+  return jwt.sign(query, process.env.JWT_SECRET, { expiresIn: '1h' });
 }
 
 const hotelConfig = (obj) => {
   return {
     method: 'get',
     maxBodyLength: Infinity,
-    url:  `https://test.api.amadeus.com${obj.url}keyword=${obj.hotelSearch}&subType=${obj.hotelTypeKey}`,
+    url:  `${process.env.AMADEUS_TEST_URL}${obj.url}keyword=${obj.hotelSearch}&subType=${obj.hotelTypeKey}`,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${global.amadeus_access_token}`
@@ -26,7 +26,7 @@ const hotelDetailsConfig = (obj) => {
   return {
     method: 'get',
     maxBodyLength: Infinity,
-    url:  `https://test.api.amadeus.com${obj.url}hotelIds=${obj.hotelBookingId}&adults=1`,
+    url:  `${process.env.AMADEUS_TEST_URL}${obj.url}hotelIds=${obj.hotelBookingId}&adults=1`,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${global.amadeus_access_token}`
@@ -38,7 +38,7 @@ const hotelRatingConfig = (obj) => {
   return {
     method: 'get',
     maxBodyLength: Infinity,
-    url:  `https://test.api.amadeus.com${obj.url}hotelIds=${obj.hotelBookingId}`,
+    url:  `${process.env.AMADEUS_TEST_URL}${obj.url}hotelIds=${obj.hotelBookingId}`,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${global.amadeus_access_token}`
