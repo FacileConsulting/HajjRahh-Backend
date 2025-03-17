@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser');
 const authMiddleware = require('./middleware/authMiddleware');
 const connectDB = require('./db');
 const hotelBookingRoute = require('./routes/hotelBooking');
@@ -20,7 +21,7 @@ const searchAirportRoute = require('./routes/searchAirport');
 const vendorsRoute = require('./routes/vendors');
 const app = express();
 
-const bodyParser = require('body-parser');
+dotenv.config();
 app.use(bodyParser.json({ limit: "100mb" })); // Increase the limit as needed
 app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(cookieParser());
@@ -31,13 +32,14 @@ app.use(cookieParser());
  */
 const apiUrl = "https://hajjrahh-backend-feg9fhcuhzbxd4a0.eastus-01.azurewebsites.net";
 // const apiUrl = "http://localhost:8000";
+// app.use(cors());
+
+console.log('@@@@@##', process.env.REACT_APP_API_URL);
 app.use(cors({
-  // origin: "http://localhost:8000",
+  // origin: process.env.REACT_APP_API_URL,
   origin: "*",
   methods: "GET,POST"
 }));
-
-dotenv.config();
 
 /**
  * Connect to the database method call
@@ -61,7 +63,7 @@ app.use("/api/searchHolidays", authMiddleware, searchHolidaysRoute);
 app.use("/api/trips", authMiddleware, tripsRoute);
 
 console.log('PORT : ', process.env.PORT);
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 const server = app.listen(port, () => {
   console.log(`Backend server is running! on ${port}`);
