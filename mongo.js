@@ -209,7 +209,8 @@ const createHolidayBooking = (query) => {
   return new HolidayBooking(query);
 }
 
-const createHolidayBookingMain = (query) => {
+const createHotelBookingMain = async(query) => {
+  // await HotelBookingMain.collection.dropIndex("hotelId_1");
   return new HotelBookingMain(query);
 }
 
@@ -297,7 +298,7 @@ module.exports = {
   updateCabBookingReview,
   updatePackageManagement,
   createHolidayBooking,
-  createHolidayBookingMain,
+  createHotelBookingMain,
   createUser,
   createPilgrimageBooking,
   createHotelBooking,

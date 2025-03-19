@@ -3,7 +3,7 @@ const { generateRandom10DigitNumber } = require('../utils');
 const { 
   getUser,
   getHotels,
-  createHolidayBookingMain,
+  createHotelBookingMain,
   saveInDB,
 } = require('../mongo');
 
@@ -26,8 +26,8 @@ exports.checkHotelBooking = async (req, res) => {
     }
 
     // Create a booking hotel  
-    console.log('sdfsholidayfdsfdfd req.body', req.body);
-    const hotelBooking = await createHolidayBookingMain({ ...req.body, status: yS, bookingNumber: generateRandom10DigitNumber() });
+    
+    const hotelBooking = await createHotelBookingMain({ ...req.body, status: yS, bookingNumber: generateRandom10DigitNumber() });
     await saveInDB(hotelBooking);
     res.status(c200).send({ data: hotelBooking, status: yS });
   } catch (error) {
