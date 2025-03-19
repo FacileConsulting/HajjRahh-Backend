@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
-  console.log('@@@@', process.env.MONGODB_URI);
-  // let dbUrl = "mongodb+srv://hajjrahh:OKIKyKtwzMFv6GmC@hajjrahhdev.fn7t3.mongodb.net/hajjrahh_database";
+  // console.log('@@@@', process.env.MONGODB_URI);
+  let dbUrl = "mongodb+srv://hajjrahh:OKIKyKtwzMFv6GmC@hajjrahhdev.fn7t3.mongodb.net/hajjrahh_database";
   try {
-    mongoose.connect(process.env.MONGODB_URI, {
+    mongoose.connect(process.env.MONGODB_URI || dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });

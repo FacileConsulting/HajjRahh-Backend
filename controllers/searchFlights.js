@@ -93,7 +93,7 @@ exports.searchFlights = async (req, res) => {
       return totalMinutes;
     }
     
-    let url = `${process.env.AMADEUS_TEST_URL}${amadeusFlightsURL}originLocationCode=${flyingFrom}&destinationLocationCode=${flyingTo}&departureDate=${flightDepartureDate}&adults=${adults}&children=${children}&infants=${infants}&travelClass=${travelClass}&currencyCode=USD`;
+    let url = `https://test.api.amadeus.com${amadeusFlightsURL}originLocationCode=${flyingFrom}&destinationLocationCode=${flyingTo}&departureDate=${flightDepartureDate}&adults=${adults}&children=${children}&infants=${infants}&travelClass=${travelClass}&currencyCode=USD`;
     if (flightReturnDate) {
       url = `${url}&returnDate=${flightReturnDate}`;
     }

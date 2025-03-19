@@ -10,7 +10,7 @@ exports.searchAirport = async (req, res) => {
   const { c200, c500, yS, airport } = constant();
   try {
     const { codes } = req.body;    
-    const url = `${process.env.AMADEUS_TEST_URL}${amadeusAirportURL}subType=AIRPORT&keyword=${codes.split('-')[0]}&countryCode=${codes.split('-')[1]}`;
+    const url = `https://test.api.amadeus.com${amadeusAirportURL}subType=AIRPORT&keyword=${codes.split('-')[0]}&countryCode=${codes.split('-')[1]}`;
     
     const config = amadeusConfig({ url });
 
