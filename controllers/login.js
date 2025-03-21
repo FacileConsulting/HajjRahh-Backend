@@ -1,25 +1,29 @@
 const { constant } = require('../constant');
 const { getToken } = require('../utils');
 const { 
-  getUser
+  getUser,
+  saveInDB
 } = require('../mongo');
 
 // Get the user data
 exports.checkLoginUser = async (req, res) => {
   const { c200, c500, login } = constant();
   try {
-    const { email, password, isGoogle = false } = req.body;
+    const { email, password, rePassword, isGoogle = false } = req.body;
     const user = await getUser({ email });
-    // console.log('QQQQQQQQQQQ##   tokenuser', user);
-    if (user && !isGoogle && !(await user.comparePassword(password))) {
+    if (user && !isGoogle && !rePassword && !(await user.comparePassword(password))) {
       return res.status(c200).send({ ...login.invalid });
+    }
+    if (user && !isGoogle && rePassword) {
+      user.password = rePassword;
+      await saveInDB(user);
     }
     if (!user) {
       return res.status(c200).send({ ...login.invalidUser });
     }
     const token = getToken({ email: user.email });
     res.status(c200).send({ 
-      ...login.valid,
+      ... (rePassword ? login.passwordChanged : login.valid),
       userId: user._id,
       token,
       username: user.username, 

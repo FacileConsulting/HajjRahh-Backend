@@ -85,6 +85,11 @@ const constant = () => {
         invalidUser: true,
         status: yS
       },
+      passwordChanged: {
+        message: 'User password changed successfully',
+        userLoggedIn: true,
+        status: yS
+      },
       valid: {
         message: 'User logged in successfully',
         userLoggedIn: true,
