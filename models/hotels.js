@@ -30,7 +30,7 @@ const hotelsSchema = new mongoose.Schema({
     required: true
   },
   roomInNumber: {
-    type: String,
+    type: Number,
     required: false
   },
   hotelType: {

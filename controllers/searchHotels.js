@@ -7,7 +7,7 @@ const {
 exports.searchHotels = async (req, res) => {
   try {
     console.log('searchHotels', req.body);
-    const { hotelId, comment, rating, userName, namePlace, hotelJourneyDate, hotelReturnDate, adults = 1, children = 0, infants = 0, travelRooms = 1, hotelTypeAll, hotelTypeHotel, hotelTypeAppartment, hotelTypeResort, hotelTypeVilla, hotelPriceLt500, hotelPriceLt1000, hotelPriceLt1500, hotelBreakfast, hotelPayPerNight, hotelCancellation, hotelRating30, hotelRating35, hotelRating40, hotelRating45, hotelRatingStar1, hotelRatingStar2, hotelRatingStar3, hotelRatingStar4, hotelRatingStar5, hotelAmenitiesAll, hotelAmenitiesAirConditioning,  hotelAmenitiesBar, hotelAmenitiesBusinessServices, hotelAmenitiesFreeInternet } = req.body;
+    const { hotelId, comment, rating, userName, namePlace, hotelJourneyDate, hotelReturnDate, adults = 1, roomInNumber = 1, hotelTypeAll, hotelTypeHotel, hotelTypeAppartment, hotelTypeResort, hotelTypeVilla, hotelPriceLt500, hotelPriceLt1000, hotelPriceLt1500, hotelBreakfast, hotelPayPerNight, hotelCancellation, hotelRating30, hotelRating35, hotelRating40, hotelRating45, hotelRatingStar1, hotelRatingStar2, hotelRatingStar3, hotelRatingStar4, hotelRatingStar5, hotelAmenitiesAll, hotelAmenitiesAirConditioning,  hotelAmenitiesBar, hotelAmenitiesBusinessServices, hotelAmenitiesFreeInternet } = req.body;
 
     const formatDate = (date) => {
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -136,7 +136,7 @@ exports.searchHotels = async (req, res) => {
   
       let query = {};
       if (
-        hotelTypeAll || hotelTypeHotel || hotelTypeAppartment || hotelTypeResort || hotelTypeVilla || hotelPriceLt500 || hotelPriceLt1000 || hotelPriceLt1500 || hotelBreakfast || hotelPayPerNight || hotelCancellation || hotelRating30 || hotelRating35 || hotelRating40 || hotelRating45 || hotelRatingStar1 || hotelRatingStar2 || hotelRatingStar3 || hotelRatingStar4 || hotelRatingStar5 || hotelAmenitiesAll || hotelAmenitiesAirConditioning ||  hotelAmenitiesBar || hotelAmenitiesBusinessServices || hotelAmenitiesFreeInternet
+        adults || roomInNumber || hotelTypeAll || hotelTypeHotel || hotelTypeAppartment || hotelTypeResort || hotelTypeVilla || hotelPriceLt500 || hotelPriceLt1000 || hotelPriceLt1500 || hotelBreakfast || hotelPayPerNight || hotelCancellation || hotelRating30 || hotelRating35 || hotelRating40 || hotelRating45 || hotelRatingStar1 || hotelRatingStar2 || hotelRatingStar3 || hotelRatingStar4 || hotelRatingStar5 || hotelAmenitiesAll || hotelAmenitiesAirConditioning ||  hotelAmenitiesBar || hotelAmenitiesBusinessServices || hotelAmenitiesFreeInternet
       ) {
         console.log('isfalse');
         query = { $or: [] };
@@ -178,6 +178,9 @@ exports.searchHotels = async (req, res) => {
       if (amenitiesArray.length > 0) {
         query.$or.push({ amenities: { $in: amenitiesArray } });
       }
+
+      query.$or.push({ adults: { $gte: adults } });
+      query.$or.push({ roomInNumber: { $gte: roomInNumber } });
   
       if (hotelPriceLt500) {
         query.$or.push({ pricePerDay: { $lt: 500 } });
@@ -195,7 +198,7 @@ exports.searchHotels = async (req, res) => {
       // query = { departure: 'Mumbai', destination: 'Abu Dhabi', dateRange: '25-10-2024'  }
       // console.log('query', query);
       const hotels = await Hotels.find(query);
-      console.log('cabsLength', hotels.length);
+      console.log('hotelsLength', hotels.length);
       if (!hotels) {
         return res.status(200).send({ message: 'No search for hotels', status: 'success', data: [] });
       }
@@ -205,6 +208,7 @@ exports.searchHotels = async (req, res) => {
       });
     }    
   } catch (error) {
+    console.log('error', error);
     res.status(500).send({ message: 'Error in search hotels', status: 'error' });
   }
 };
