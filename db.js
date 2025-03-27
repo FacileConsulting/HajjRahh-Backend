@@ -4,7 +4,7 @@ const connectDB = async () => {
   // console.log('@@@@', process.env.MONGODB_URI);
   let dbUrl = "mongodb+srv://hajjrahh:OKIKyKtwzMFv6GmC@hajjrahhdev.fn7t3.mongodb.net/hajjrahh_database";
   try {
-    mongoose.connect(process.env.MONGODB_URI || dbUrl, {
+    mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });

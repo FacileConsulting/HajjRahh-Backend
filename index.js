@@ -62,7 +62,7 @@ app.use("/api/myAccount", authMiddleware, myAccountRoute);
 app.use("/api/searchHolidays", authMiddleware, searchHolidaysRoute);
 app.use("/api/trips", authMiddleware, tripsRoute);
 
-console.log('PORT : ', process.env.PORT);
+// console.log('PORT : ', process.env.PORT);
 const port = process.env.PORT;
 
 const server = app.listen(port, () => {

@@ -7,7 +7,7 @@ const generateRandom10DigitNumber = () => {
 }
 
 const getToken = (query) => {
-  return jwt.sign(query, process.env.JWT_SECRET || 'a1b2c3d4e5f6g7h8i9j0', { expiresIn: '1h' });
+  return jwt.sign(query, process.env.JWT_SECRET, { expiresIn: '1h' });
 }
 
 const hotelConfig = (obj) => {
