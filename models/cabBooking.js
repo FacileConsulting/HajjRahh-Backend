@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
+const user = require('./user');
 
 const cabBookingSchema = new mongoose.Schema({
+  userMobile: {
+    type: String,
+    required: true  
+  },
   cabBookVehicleName: {
     type: String,
     required: true

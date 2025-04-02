@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
+const user = require('./user');
 
 const restaurantPaymentSchema = new mongoose.Schema({
+  userMobile: {
+    type: String,
+    required: true
+  },
   restaurantPaymentDateTime: {
     type: String,
     required: true

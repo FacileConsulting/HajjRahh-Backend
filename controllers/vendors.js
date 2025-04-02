@@ -375,12 +375,9 @@ exports.vendors = async (req, res) => {
       } else {
         return res.status(c200).send({ ...pilgrimageBooking.notFound });
       }
-    } else if (type === pilgrimageBooking.pilgrimageBookingFetchAll) {
-
-      // Fetch all pilgrimage bookings data
-      // console.log('###############3333333333333***********');
-      const pilgrimageBookingsAll = await getAllPilgrimageBooking({}, { 'pilBookTravelersList': 0 });
-      // console.log('###############3333333333333', pilgrimageBookingsAll);
+    } else if (type === pilgrimageBooking.pilgrimageBookingFetchAll) {      
+      let query = { userMobile };
+      const pilgrimageBookingsAll = await getAllPilgrimageBooking(query, { pilBookTravelersList: 0 });
 
       if (!pilgrimageBookingsAll || pilgrimageBookingsAll.length == 0) {
         res.status(c200).send({ ...pilgrimageBooking.failed });
@@ -607,13 +604,11 @@ exports.vendors = async (req, res) => {
 
       res.status(c200).send({ ...packageManagement.created });
     } else if (type === packageManagement.packageManagementFetchAll) {
-      // console.log('###############3333333333333***********@@@@@@@@@');
-      const result = await getAllPackageManagement();
-      // console.log('###############3333333333333***********', result);
+      let query = { userMobile };
+      const result = await getAllPackageManagement(query);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...packageManagement.failed });
-      } else {
-        
+      } else {        
         res.status(c200).send({
           status: yS,
           data: result
@@ -667,9 +662,8 @@ exports.vendors = async (req, res) => {
 
       res.status(c200).send({ ...cab.created });
     } else if (type === cab.cabPromotionFetchAll) {
-      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllCabPromotion();
-      // console.log('###############3333333333333***********', result);
+      let query = { userMobile };
+      const result = await getAllCabPromotion(query);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...cab.failed });
       } else {
@@ -734,9 +728,9 @@ exports.vendors = async (req, res) => {
 
       res.status(c200).send({ ...fleet.created });
     } else if (type === fleet.fleetManagementFetchAll) {
-      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllFleetManagement();
-      // console.log('###############3333333333333***********', result);
+      let query = { userMobile };
+      const result = await getAllFleetManagement(query);
+      console.log('#########$#$#$#', result, query);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...fleet.failed });
       } else {
@@ -799,8 +793,8 @@ exports.vendors = async (req, res) => {
 
       res.status(c200).send({ ...driver.created });
     } else if (type === driver.driverManagementFetchAll) {
-      console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllDriverManagement();
+      const query = { userMobile };
+      const result = await getAllDriverManagement(query);
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...driver.failed });
@@ -862,8 +856,9 @@ exports.vendors = async (req, res) => {
 
       res.status(c200).send({ ...restaurantMenu.created });
     } else if (type === restaurantMenu.fetchAll) {
+      const query = { userMobile };
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllRestaurantMenu();
+      const result = await getAllRestaurantMenu(query);
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurantMenu.failed });
@@ -921,8 +916,9 @@ exports.vendors = async (req, res) => {
 
       res.status(c200).send({ ...restaurant.created });
     } else if (type === restaurant.fetchAll) {
+      const query = { userMobile };
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllRestaurantPromotion();
+      const result = await getAllRestaurantPromotion(query);
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurant.failed });
@@ -982,8 +978,9 @@ exports.vendors = async (req, res) => {
 
       res.status(c200).send({ ...restaurantSeating.created });
     } else if (type === restaurantSeating.fetchAll) {
+      const query = { userMobile };
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllRestaurantSeating();
+      const result = await getAllRestaurantSeating(query);
       // console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurantSeating.failed });
@@ -1007,8 +1004,9 @@ exports.vendors = async (req, res) => {
         return res.status(c200).send({ ...cabBooking.notFound });
       }
     } else if (type === cabBooking.cabBookingFetchAll) {
+      const query = { userMobile };
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllCabBooking();
+      const result = await getAllCabBooking(query);
       console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...cabBooking.failed });
@@ -1034,8 +1032,9 @@ exports.vendors = async (req, res) => {
         return res.status(c200).send({ ...restaurantFeedback.notFound });
       }
     } else if (type === restaurantFeedback.fetchAll) {
+      const query = { userMobile };
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllRestaurantFeedback();
+      const result = await getAllRestaurantFeedback(query);
       console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurantFeedback.failed });
@@ -1062,8 +1061,9 @@ exports.vendors = async (req, res) => {
         return res.status(c200).send({ ...restaurantFeedback.notFound });
       }
     } else if (type === restaurantOrdering.fetchAll) {
+      const query = { userMobile };
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllRestaurantOrdering();
+      const result = await getAllRestaurantOrdering(query);
       console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurantOrdering.failed });
@@ -1074,8 +1074,9 @@ exports.vendors = async (req, res) => {
         });
       }
     } else if (type === restaurantPayment.fetchAll) {
+      const query = { userMobile };
       console.log('@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      const result = await getAllRestaurantPayment();
+      const result = await getAllRestaurantPayment(query);
       console.log('###############3333333333333***********', result);
       if (!result || result.length == 0) {
         res.status(c200).send({ ...restaurantPayment.failed });

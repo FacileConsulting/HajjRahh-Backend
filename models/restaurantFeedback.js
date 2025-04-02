@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const restaurantFeedbackSchema = new mongoose.Schema({
+  userMobile: {
+    type: String,
+    required: true
+  },
   restaurantFeedbackCustomer: {
     type: String,
     required: true

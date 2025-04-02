@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const fleetManagementSchema = new mongoose.Schema({
+  userMobile: {
+    type: String,
+    required: true  
+  },
   cabVehicleName: {
     type: String,
     required: true

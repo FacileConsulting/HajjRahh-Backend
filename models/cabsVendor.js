@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const cabsVendorSchema = new mongoose.Schema({
+  userMobile: {
+    type: String,
+    required: true
+  },
   cabPromoCode: {
     type: String,
     required: true

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const restaurantMenuSchema = new mongoose.Schema({
+  userMobile: {
+    type: String,
+    required: true
+  },
   restaurantItemName: {
     type: String,
     required: true

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const restaurantPromotionSchema = new mongoose.Schema({
+  userMobile: {
+    type: String,
+    required: true
+  },
   restaurantPromoCode: {
     type: String,
     required: true
