@@ -14,14 +14,14 @@ const refreshAmadeusToken = async (failedRequest) => {
     const config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `https://test.api.amadeus.com${amadeusTokenURL}`,
+      url: `${process.env.AMADEUS_TEST_URL}${amadeusTokenURL}`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: new URLSearchParams({
         grant_type: 'client_credentials',
-        client_id: process.env.AMADEUS_TEST_API_KEY || 's6mATMSG5zAb4kmTFhCQJJNy8nLO54sd',
-        client_secret: process.env.AMADEUS_TEST_API_SECRET || 'uB5RGrnPzyWXYcgj'
+        client_id: process.env.AMADEUS_TEST_API_KEY,
+        client_secret: process.env.AMADEUS_TEST_API_SECRET
       })
     };
     const response = await axiosInstance.request(config);
